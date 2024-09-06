@@ -1,5 +1,5 @@
 .auth{
-    background-image: url('./backgroundReg.png');
+    background-image: url('../assets/images/backgroundReg.png');
     width: 100%;
     display: flex;
     align-items: center;
