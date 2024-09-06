@@ -13,7 +13,7 @@ export default function Header() {
                         <li><a href="/home">Home</a></li>
                         <li><a href="/store">Store</a></li>
                         <li><a href="/about">About</a></li>
-                        <li><a href="/signup" className="signup-btn">Sign Up</a></li>
+                        <li><a href="/register" className="signup-btn">Sign Up</a></li>
                         <li><a href="/login" className="login-btn">Login</a></li>
                     </div>
                 </ul>
