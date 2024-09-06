@@ -1,18 +1,8 @@
 .auth{
+    background-image: url('../assets/images/backgroundReg.png');
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    height: 100dvh;
-}
-
-.auth section:first-child {
-    width: 50%;
-    background-color: grey;
-}
-
-.auth section:last-child {
-    width: 50%;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: 100dvh;
 }

@@ -1,9 +1,9 @@
 import next, { Metadata } from "next"
 import Image from "next/image"
-import instagram from '../assets/images/instagram.svg'
-import facebook from '../assets/images/facebook.svg'
-import twitter from '../assets/images/twitter.svg'
-import youtube from '../assets/images/youtube.svg'
+import instagram from '../../assets/images/instagram.svg'
+import facebook from '../../assets/images/facebook.svg'
+import twitter from '../../assets/images/twitter.svg'
+import youtube from '../../assets/images/youtube.svg'
 
 import './style.css'
 
