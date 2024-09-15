@@ -1,26 +1,22 @@
-import next, { Metadata } from "next"
+import { Metadata } from "next"
 import Image from "next/image"
-import instagram from '../../assets/images/instagram.svg'
-import facebook from '../../assets/images/facebook.svg'
-import twitter from '../../assets/images/twitter.svg'
-import youtube from '../../assets/images/youtube.svg'
-
-import './style.css'
-
+import instagram from '../../app/assets/images/instagram.svg'
+import facebook from '../../app/assets/images/facebook.svg'
+import twitter from '../../app/assets/images/twitter.svg'
+import youtube from '../../app/assets/images/youtube.svg'
 
 export const metadata: Metadata = {
     title: "Footer",
     description: "This is the footer of the page"
 }
-export default function Footer() {
+
+export function Footer() {
     return (
-        <footer>
+        <footer className="bg-custom-gray text-gray-200 py-6 w-full absolute bottom-0">
             <div className="container mx-auto px-6">
                 <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-1/4 mb-6 md:mb-0">
-                        <h3 className="text-lg font-semibold mb-2">
-                            Categorías
-                        </h3>
+                        <h3 className="text-lg font-semibold mb-2">Categorías</h3>
                         <ul className="list-none">
                             <li>
                                 <a href="#" className="text-sm hover:underline">Sedan</a>
@@ -70,4 +66,3 @@ export default function Footer() {
         </footer>
     )
 }
-
