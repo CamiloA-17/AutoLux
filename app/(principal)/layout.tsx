@@ -1,6 +1,5 @@
 import './layout.css'
-import {Header} from '@/components';
-import Footer from './(footer)/page';
+import {Header, Footer} from '@/components';
 
 export default function AuthLayout({
     children
