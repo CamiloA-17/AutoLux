@@ -1,4 +1,3 @@
-import './layout.css'
 import {Header, Footer} from '@/components';
 
 export default function AuthLayout({
@@ -9,7 +8,7 @@ export default function AuthLayout({
     return (
         <main className="auth">
             <Header />
-            <section>
+            <section className='flex-1'>
                 {children}
             </section>
             <Footer />

@@ -1,4 +1,5 @@
 export const colorTextRed = 'text-red-400';
+export const colorTextWhite = 'text-[#EEEEEE]'
 export const colorBorderRed = 'border border-red-600';
 export const colorBgRed = 'bg-red-400';
 export const stylesForSubtitle = 'font-bold italic text-md text-black text-base';
