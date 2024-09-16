@@ -12,19 +12,22 @@ import { colorBggray } from '../tokens';
 
 export function Slide() {
     return (
-        <div className="w-full bg-gray-100">
+        <div className= {`flex items-center ${colorBggray} w-full`}>
             <div className="w-full">
                 <Swiper
                     spaceBetween={30}
                     loop={true}
                     navigation={true}
                     autoplay={{ delay: 3000 }}
-                    modules={[Autoplay, Navigation]}
                     className="mySwiper"
+                    modules={[Autoplay, Navigation, Pagination]}
                 >
                     <SwiperSlide>
                         <div className="relative w-full h-[40vw]">
                             <Image src={carro1} alt="Car 1" layout="fill" objectFit="cover" />
+                        </div>
+                        <div className='text-center my-10 font-bold'>
+                            <h1>Jaguar F-Type</h1>
                         </div>
                     </SwiperSlide>
 
@@ -32,9 +35,13 @@ export function Slide() {
                         <div className="relative w-full h-[40vw]">
                             <Image src={carro2} alt="Car 2" layout="fill" objectFit="cover" />
                         </div>
+                        <div className='text-center my-10 font-bold'>
+                            <h1>Lamborghini Revuelto</h1>
+                        </div>
                     </SwiperSlide>
                 </Swiper>
             </div>
         </div>
     );
 }
+
