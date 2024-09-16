@@ -8,3 +8,4 @@ export * from './organism/Register';
 export * from './organism/Login';
 export * from './organism/Card';
 export * from './organism/Store';
+export * from './atoms/Adorno';

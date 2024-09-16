@@ -1,5 +1,5 @@
 export const colorTextRed = 'text-red-400';
-export const colorTextWhite = 'text-[#EEEEEE]'
+export const colorTextWhite = 'text-[#EEEEEE] hover:underline'
 export const colorBorderRed = 'border border-red-600';
 export const colorBgRed = 'bg-red-400';
 export const stylesForSubtitle = 'font-bold italic text-md text-black text-base';
@@ -10,3 +10,5 @@ export const hooverForCard = 'hover:border-black shadow-lg transition-transform 
 export const stylesForBlock = 'flex justify-between text-xs mb-2';
 export const spacer = 'border-t border-black my-2';
 export const colorHoverButton = 'hover:text-slate-600';
+export const colorBgblack= 'bg-[#212121]'
+export const colorBggray = 'bg-gray-100'
