@@ -27,7 +27,7 @@ export function ProfileBody() {
             <a className="flex justify-center w-[250px]" href="/profile">
               <Image src={profileLogoPage} alt="Logo" className="" />
             </a>
-            <h2 className={`mt-5 text-2xl font-extrabold text-center ${colorTextRed}`}>
+            <h2 className={`mt-5 text-2xl font-extrabold text-center text-[#424242]`}>
               Administrador
             </h2>
           </div>
