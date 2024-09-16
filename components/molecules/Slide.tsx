@@ -8,10 +8,11 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { colorBggray } from '../tokens';
 
 export function Slide() {
     return (
-        <div className="flex items-center bg-gray-100 w-full my-20">
+        <div className={`flex items-center ${colorBggray} w-full my-20`}>
             <Swiper spaceBetween={30} loop={true} navigation={true} autoplay={{ delay: 3000 }} className="mySwiper" modules={[Autoplay, Navigation, Pagination]}>
                 <SwiperSlide>
                     <div className="relative w-full h-[40vw]">
