@@ -13,7 +13,7 @@ export function Register() {
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form action="#" method="POST" className="space-y-6">
               <div>
-                <label htmlFor="full-name" className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}>
+                <label htmlFor="full-name" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
                   Nombre Completo
                 </label>
                 <div className="mt-2">
@@ -29,7 +29,7 @@ export function Register() {
               </div>
 
               <div>
-                <label htmlFor="email" className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}>
+                <label htmlFor="email" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
                   Correo electrónico
                 </label>
                 <div className="mt-2">
@@ -45,7 +45,7 @@ export function Register() {
               </div>
 
               <div>
-                <label htmlFor="password" className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}>
+                <label htmlFor="password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
                   Contraseña
                 </label>
                 <div className="mt-2">
@@ -61,7 +61,7 @@ export function Register() {
               </div>
 
               <div>
-                <label htmlFor="confirm-password" className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}>
+                <label htmlFor="confirm-password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
                   Confirmar contraseña
                 </label>
                 <div className="mt-2">
