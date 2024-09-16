@@ -16,7 +16,7 @@ export function Header() {
                 <ul className="flex items-center space-x-6">
                     <li><a href="/home" className = {`${colorTextWhite}`} >Home</a></li>
                     <li><a href="/store" className= {`${colorTextWhite}`} >Store</a></li>
-                    <li><a href="/about" className= {`${colorTextWhite}`} >About</a></li>
+                    <li><a href="#about" className={`${colorTextWhite}`}>about</a></li>
                     <li>
                         <a href="/register" className="bg-white text-gray-900 px-4 py-2 rounded-full hover:bg-gray-300">
                             Sign Up

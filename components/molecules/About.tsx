@@ -1,11 +1,31 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import logo from "../../app/assets/images/pixelcut-export.png";
 import { colorBggray } from '../tokens';
+import { useRef, useEffect } from 'react';
 
 export function About() {
+    const aboutRef = useRef(null);
+
+    useEffect(() => {
+        const handleScrollToAbout = () => {
+            if (window.location.hash === '#about') {
+                aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+            }
+        };
+
+        window.addEventListener('hashchange', handleScrollToAbout);
+        handleScrollToAbout();
+
+        return () => {
+            window.removeEventListener('hashchange', handleScrollToAbout);
+        };
+    }, []);
+
     return (
-        <div className={`${colorBggray} py-10 px-10 my-10`}>
+        <div id="about" className={`${colorBggray} py-10 px-10 my-10`} ref={aboutRef}>
             <div className="container mx-auto flex items-center space-x-20">
                 <div className="flex-shrink-0">
                     <Image src={logo} alt="Autolux Logo" className="w-60 h-auto" />
