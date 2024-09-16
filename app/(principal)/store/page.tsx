@@ -1,4 +1,6 @@
+import { StoreManagement } from "@/components"
 import { Metadata } from "next"
+
 
 export const metadata: Metadata = {
   title: "Store",
@@ -6,7 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function store() {
+
   return (
-    <div></div>
-  )
+    <StoreManagement />
+  );
 }
+
