@@ -1,4 +1,3 @@
-import './layout.css'
 import {Header, Footer} from '@/components';
 
 export default function AuthLayout({
