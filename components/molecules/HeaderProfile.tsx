@@ -2,12 +2,13 @@ import React from 'react';
 import Image from 'next/image';
 import logo from "../../app/assets/images/pixelcut-export.png";
 import logoProfile from "../../app/assets/images/profileLogo.png";
+import { colorBgblack } from "../tokens";
 
 
 export function HeaderProfile() {
     return (
-        <header className="bg-custom-gray p-4">
-            <nav className="flex justify-between items-center">
+        <header className={`bg-custom-gray p-4 ${colorBgblack}`}>
+            <nav className={`flex justify-between items-center`}>
                 <div className="logo">
                     <a href="/">
                         <Image src={logo} alt="Logo" className="w-20 h-auto" />
