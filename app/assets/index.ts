@@ -1,7 +1,10 @@
-export const Instagram = '/images/instagram.svg';
-export const Facebook = '/images/facebook.svg';
-export const Twitter = '/images/twitter.svg';
-export const Youtube = '/images/youtube.svg';
-export const logo = '/images/pixelcut-export.png';
-export const backgroundRegister = '/images/backgroundReg.png';
+const imagePaths = {
+    instagram: './images/instagram.svg',
+    facebook: './images/facebook.svg',
+    twitter: './images/twitter.svg',
+    youtube: './images/youtube.svg',
+    lamboRevuelto: './images/lamborghini-revuelto.svg',
+    JaguarTypeR: './images/f-type-r-dynamic.svg' 
+}
 
+export default imagePaths;
