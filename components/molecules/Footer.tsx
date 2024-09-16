@@ -1,3 +1,5 @@
+"use client";
+
 import { Metadata } from "next"
 import Image from "next/image"
 import instagram from '../../app/assets/images/instagram.svg'
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 
 export function Footer() {
     return (
-        <footer className="bg-custom-gray text-gray-200 py-6 w-full relative bottom-0">
+        <footer className="bg-custom-gray text-gray-200 py-6 w-full bottom-0">
             <div className="container mx-auto px-6">
                 <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-1/4 mb-6 md:mb-0">
