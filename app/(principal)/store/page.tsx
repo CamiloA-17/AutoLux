@@ -24,17 +24,7 @@ export default function store() {
           engine="Motor de combustión interna V12 6.5L"
           carImage={lamborghini}
         />
-        <Card 
-          idCard='2' 
-          name="Lamborghini Aventador"   
-          time="2.8" 
-          timeText="Aceleración 0-100km/h (segundos)" 
-          horsepower="700/8250"
-          horsepowerText="Potencia máxima (CV/rpm)"
-          topSpeed="350km/h"
-          engine="Motor de combustión interna V12 6.5L"
-          carImage={lamborghini}
-        />
+        
         <Card
           idCard='3' 
           name="Jaguar F-Type"   

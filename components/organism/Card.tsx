@@ -1,9 +1,11 @@
+'use client';
+
 import React from "react"; 
 
 import Link from "next/link";
 import Image from "next/image";
 
-import { spacer, stylesForBlock, stylesForCard, stylesForSubtitle, stylesForText, stylesForTitle } from "../tokens";
+import { hooverForCard, spacer, stylesForBlock, stylesForCard, stylesForSubtitle, stylesForText, stylesForTitle } from "../tokens";
 
 
 type CardProps = {
@@ -21,7 +23,7 @@ type CardProps = {
 
 export function Card({idCard, carImage, name, time, timeText, horsepower, horsepowerText, topSpeed, engine }: CardProps) {
   return (
-    <article className={`flex flex-col w-80 rounded-md border ${stylesForCard}`}>
+    <article className={` ${stylesForCard} ${hooverForCard}`}>
         <Link href={`store/${idCard}`}>
             <Image className="rounded-t-md w-full h-32 object-cover" src={carImage} alt="" />
             <div className="p-4 flex flex-col flex-grow">
