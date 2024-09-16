@@ -4,7 +4,7 @@ import logo from "../../app/assets/images/pixelcut-export.png";
 
 export function About() {
     return (
-        <div className="bg-gray-100 py-10 pl-10 pr-10 my-10">
+        <div className="bg-gray-100 py-10 px-10 my-10">
             <div className="container mx-auto flex items-center space-x-20">
                 <div className="flex-shrink-0">
                     <Image src={logo} alt="Autolux Logo" className="w-60 h-auto" />

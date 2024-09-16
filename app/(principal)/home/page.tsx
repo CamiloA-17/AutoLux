@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import {About} from '@/components'
+import { About, Slide } from '@/components'
 
 export const metadata: Metadata = {
   title: "Home",
@@ -8,8 +8,11 @@ export const metadata: Metadata = {
 
 export default function home() {
   return (
-    <main className="w-full max-w-screen-xl mx-auto flex flex-wrap mt-10 justify-center">
-      <About />
-    </main>
+    <div className="my-10">
+      <Slide />
+      <main className="w-full max-w-screen-xl mx-auto flex flex-wrap mt-10 justify-center">
+        <About />
+      </main>
+    </div>
   )
 }
