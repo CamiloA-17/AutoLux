@@ -17,7 +17,7 @@ export function HeaderProfile() {
                 <ul className="flex items-center space-x-6">
                     <li><a href="/home" className='text-white hover:text-gray-300'>Home</a></li>
                     <li><a href="/store" className='text-white hover:text-gray-300'>Store</a></li>
-                    <li><a href="/about" className='text-white hover:text-gray-300'>About</a></li>
+                    <li><a href="/home/#about" className='text-white hover:text-gray-300'>About</a></li>
                     <a >
                         <Image src={logoProfile} alt="Logo" className="w-10 h-auto" />
                     </a>
