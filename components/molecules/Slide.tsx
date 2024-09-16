@@ -12,15 +12,21 @@ export function Slide() {
     return (
         <div className="flex items-center bg-gray-100 w-full">
             <div className="w-full">
-                <Swiper spaceBetween={30} loop={true} navigation={true} autoplay={{ delay: 3000 }} className="mySwiper">
-                    <SwiperSlide>
-                        <div className="relative w-full h-[500px]">
+                <Swiper
+                    spaceBetween={30}
+                    loop={true}
+                    navigation={true}
+                    autoplay={{ delay: 3000 }}
+                    className="mySwiper"
+                >
+                    <SwiperSlide >
+                        <div className="relative w-full h-[40vw]"> 
                             <Image src={carro1} alt="Car 1" layout="fill" objectFit="cover" />
                         </div>
                     </SwiperSlide>
 
                     <SwiperSlide>
-                        <div className="relative w-full h-[500px]">
+                        <div className="relative w-full h-[40vw]"> 
                             <Image src={carro2} alt="Car 2" layout="fill" objectFit="cover" />
                         </div>
                     </SwiperSlide>

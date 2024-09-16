@@ -11,3 +11,4 @@ export * from './molecules/About';
 export * from './molecules/Slide'
 export * from './organism/Login'
 export * from './organism/Register'
+export * from './organism/ProfileBody'
