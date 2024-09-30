@@ -37,7 +37,7 @@ export function Login() {
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form action="#" method="POST" className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <label htmlFor="email" className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}>
+                <label htmlFor="email" className={`block text-sm  font-medium leading-6 ${colorTextWhite}`}>
                   Correo electrónico
                 </label>
                 <div className="mt-2">
@@ -53,7 +53,7 @@ export function Login() {
               </div>
 
               <div>
-                <label htmlFor="password" className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}>
+                <label htmlFor="password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
                   Contraseña
                 </label>
                 <div className="mt-2">
