@@ -48,7 +48,7 @@ export function Register() {
             <div>
               <label
                 htmlFor="full-name"
-                className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}
+                className={`block text-sm font-medium leading-6 ${colorTextWhite}`}
               >
                 Nombre Completo
               </label>
@@ -70,7 +70,7 @@ export function Register() {
             <div>
               <label
                 htmlFor="email"
-                className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}
+                className={`block text-sm font-medium leading-6 ${colorTextWhite}`}
               >
                 Correo electrónico
               </label>
@@ -113,7 +113,7 @@ export function Register() {
             <div>
               <label
                 htmlFor="confirm-password"
-                className={`block text-sm font-extrabold font-medium leading-6 ${colorTextWhite}`}
+                className={`block text-sm font-medium leading-6 ${colorTextWhite}`}
               >
                 Confirmar contraseña
               </label>
