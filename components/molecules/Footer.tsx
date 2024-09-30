@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 }
 
 export function Footer() {
+    
     return (
         <footer className = {`text-gray-200 py-6 w-full bottom-0 ${colorBgblack}`}>
             <div className="container mx-auto px-6">

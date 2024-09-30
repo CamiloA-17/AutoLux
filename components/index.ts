@@ -2,6 +2,12 @@ export * from './molecules/Header';
 export * from './molecules/HeaderProfile';
 export * from './molecules/Footer';
 export * from './molecules/About'
+export * from './molecules/Footer';
+export * from './molecules/About';
+export * from './molecules/Slide'
+export * from './organism/Login'
+export * from './organism/Register'
+export * from './organism/ProfileBody'
 export * from './molecules/Slide';
 export * from './molecules/SearchBar';
 export * from './organism/Register';
