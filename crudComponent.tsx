@@ -10,7 +10,7 @@ export const CrudComponent: React.FC = () => {
     // Llamar a las funciones CRUD
     const performCrudOperations = async () => {
       // Crear un usuario
-      await createUser(userId, { nombre: "Pedro", email: "pedro@example.com", password: "asdfasd"});
+      await createUser(userId, { name: "Pedro", email: "pedro@example.com", password: "asdfasd"});
 
       // Leer todos los usuarios
       console.log("Usuarios en la colección:");
