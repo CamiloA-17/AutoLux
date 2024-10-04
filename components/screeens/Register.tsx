@@ -1,9 +1,11 @@
   'use client';
   import { colorTextWhite } from "../tokens";
   import { useForm, SubmitHandler } from "react-hook-form";
+  import { createUser } from "@/libs/api";
 
   type Inputs = {
     name: string;
+    id: string;
     email: string;
     password: string;
     confirmPassword: string;
@@ -17,13 +19,10 @@
       formState: { errors },
     } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-      console.log(data);
-      const body = {
-        name: data.name,
-        email: data.email,
-        pass: data.password,
-      };
+    const onSubmit: SubmitHandler<Inputs> = async (data) => {
+      const { name, id, email, password } = data;
+      
+      const add_user = await createUser(id, { name, email, password });
     };
 
     const password = watch("password");
@@ -59,6 +58,26 @@
                     type="text"
                     autoComplete="name"
                     placeholder="John Doe"
+                    className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                {errors.name && (
+                  <span className="text-red-500 text-sm">Nombre requerido</span>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="id"
+                  className={`block text-sm font-medium leading-6 ${colorTextWhite}`}
+                >
+                  Cedula
+                </label>
+                <div className="mt-2">
+                  <input
+                    {...register("id", { required: true })}
+                    id="id"
+                    type="text"
                     className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
