@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { createUser, getUsers, updateUser, deleteUser } from './libs/api'; // Asegúrate de que la ruta sea correcta
+import { createUser, getUsers, updateUser, deleteUser } from './libs/api'; 
 
 export const CrudComponent: React.FC = () => {
   useEffect(() => {
