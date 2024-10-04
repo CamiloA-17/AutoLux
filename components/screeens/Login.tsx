@@ -1,7 +1,9 @@
 'use client';
-import { Metadata } from "next"
 import { colorTextWhite } from "../tokens";
 import { useForm, SubmitHandler } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { loginSchema } from "@/validator/loginSchema"
+import { getInfoUser } from "@/libs/api_general"
 
 
 type Inputs = {
@@ -17,14 +19,22 @@ export function Login() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>()
+  } = useForm<Inputs>({
+    resolver: zodResolver(loginSchema)
+  })
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data)
     const body = {
-      user: data.email,
-      pass: data.password
+      email: data.email,
+      password: data.password
     }
+    getInfoUser(body)
+    .then((data) => {
+      console.log('Llegando', data);
+    })
   }
+  
 
   return (
     <>
@@ -49,6 +59,7 @@ export function Login() {
                     placeholder="example@example.com"
                     className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.email && <p className="text-red-500 text-sm mt-2">{errors.email.message}</p>}
                 </div>
               </div>
 
@@ -64,6 +75,7 @@ export function Login() {
                     autoComplete="current-password"
                     className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.password && <p className="text-red-500 text-sm mt-2">{errors.password.message}</p>}
                 </div>
               </div>
 
