@@ -44,10 +44,21 @@ export async function deleteUser(userId: string) {
   console.log(`Usuario con ID ${user} eliminado.`);
 }
 
+export async function getUser(userId: string) {
+  const user = doc(db, "usuarios", userId);
+  const docSnapshot = await getDoc(user);
+  
+  if (docSnapshot.exists()) {
+      console.log(`Usuario con ID ${userId}:`, docSnapshot.data());
+  } else {
+      console.error(`No se encontró el documento con ID: ${userId}`);
+  }
+  }
+
 //login
 
 export const loginUser = async (email: string, password: string) => {
-  const q = query(collection(db, 'users'), where('email', '==', email));
+  const q = query(collection(db, 'usuarios'), where('email', '==', email));
   try {
     const querySnapshot = await getDocs(q);
     if (querySnapshot.empty) {
@@ -56,7 +67,6 @@ export const loginUser = async (email: string, password: string) => {
     }
     const userDoc = querySnapshot.docs[0];
     const hashedPassword = userDoc.data().password;
-    // Comparar la contraseña ingresada con la hasheada
     const match = await bcrypt.compare(password, hashedPassword);
     if (match) {
       console.log('Inicio de sesión exitoso');
