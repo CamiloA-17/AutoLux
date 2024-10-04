@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 const usuariosCollection = collection(db, "usuarios"); 
 
 // Crear un nuevo usuario
-export async function createUser(userId: string, userData: { nombre: string; email: string }) {
+export async function createUser(userId: string, userData: { name: string; email: string; password: string }) {
   try {
     await addDoc(usuariosCollection, { ...userData, id: userId }); 
     console.log(`Usuario creado con ID: ${userId}`);
@@ -32,7 +32,7 @@ export async function updateUser(userId: string, updatedData: { email?: string }
       await updateDoc(user, updatedData);
       console.log(`Usuario con ID ${userId} actualizado.`);
     } else {
-      console.error(`No se encontró el documento con ID: ${userId}`);
+      console.error(`No se encontrÃ³ el documento con ID: ${userId}`);
     }
   }
   
@@ -43,7 +43,6 @@ export async function deleteUser(userId: string) {
   await deleteDoc(user); 
   console.log(`Usuario con ID ${user} eliminado.`);
 }
-
 
 //login
 
