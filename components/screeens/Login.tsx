@@ -4,7 +4,9 @@ import { colorTextWhite } from "../tokens";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/validator/loginSchema";
-import { loginUser } from "@/libs/api";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebaseConfig";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
   email: string;
@@ -12,6 +14,9 @@ type Inputs = {
 };
 
 export function Login() {
+
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -22,15 +27,16 @@ export function Login() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const response = await loginUser(data.email, data.password);
 
-      if (response) {
-        console.log('Inicio de sesión exitoso:', response);
-        // Aquí puedes redirigir al usuario, por ejemplo a la página principal
-        // router.push('/dashboard') si usas el router de Next.js o simplemente cambiar el estado
-      } else {
-        console.log('Error al iniciar sesión, credenciales incorrectas');
-      }
+      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+      const user = userCredential.user;
+      const token = await user.getIdToken();      
+
+      localStorage.setItem('token', token);
+
+      console.log('Token de inicio de sesión:', token);
+      router.replace(`profile/${user.uid}`);
+      
     } catch (error) {
       console.error('Error durante el login:', error);
     }

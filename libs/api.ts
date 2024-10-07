@@ -1,82 +1,90 @@
-import { db } from '../firebaseConfig'; 
-import { query, where, addDoc, getDocs, collection, updateDoc, deleteDoc, doc, getDoc } from "firebase/firestore"; 
-import bcrypt from 'bcryptjs';
-const usuariosCollection = collection(db, "usuarios"); 
+import { db } from '../firebaseConfig';
+import { query, where, addDoc, getDocs, collection, updateDoc, deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebaseConfig";
 
-// Crear un nuevo usuario
-export async function createUser(userId: string, userData: { name: string; email: string; password: string }) {
-  try {
-    await addDoc(usuariosCollection, { ...userData, id: userId }); 
-    console.log(`Usuario creado con ID: ${userId}`);
-  } catch (error) {
-    console.error("Error al crear el usuario:", error);
-  }
-}
+const usuariosCollection = collection(db, "usuarios");
 
-// Leer todos los usuarios
+export const createUser = async (name: string, id: string, email: string, password: string) => {
+    try {
+        if (!await userExists(id)) {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            await setDoc(doc(db, 'users', user.uid), {
+                name,
+                id,
+                email,
+            });
+
+            return { success: true, message: 'Usuario registrado exitosamente' };
+        }
+        return { success: false, message: 'El usuario ya existe' };
+
+    } catch (error: any) {
+        if (error.code === 'auth/email-already-in-use') {
+            return { success: false, message: 'El correo ya está en uso' };
+        }
+        return { success: false, message: error.message };
+    }
+};
+
 export async function getUsers() {
-  const all_users = await getDocs(usuariosCollection);
-  all_users.forEach((doc) => {
-    console.log(`${doc.id} => ${JSON.stringify(doc.data())}`); 
-  });
+    const all_users = await getDocs(usuariosCollection);
+    all_users.forEach((doc) => {
+        console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+    });
 }
 
-// Actualizar un usuario
 export async function updateUser(userId: string, updatedData: { email?: string }) {
     const user = doc(db, "usuarios", userId);
     console.log("Intentando actualizar el usuario con ID:", userId);
-  
-    const docSnapshot = await getDoc(user);
-    
-    if (docSnapshot.exists()) {
-      await updateDoc(user, updatedData);
-      console.log(`Usuario con ID ${userId} actualizado.`);
-    } else {
-      console.error(`No se encontrÃ³ el documento con ID: ${userId}`);
-    }
-  }
-  
 
-// Eliminar un usuario
-export async function deleteUser(userId: string) {
-  const user = doc(db, "usuarios", userId); 
-  await deleteDoc(user); 
-  console.log(`Usuario con ID ${user} eliminado.`);
+    const docSnapshot = await getDoc(user);
+
+    if (docSnapshot.exists()) {
+        await updateDoc(user, updatedData);
+        console.log(`Usuario con ID ${userId} actualizado.`);
+    } else {
+        console.error(`No se encontró el documento con ID: ${userId}`);
+    }
 }
 
-export async function getUser(userId: string) {
-  const user = doc(db, "usuarios", userId);
-  const docSnapshot = await getDoc(user);
-  
-  if (docSnapshot.exists()) {
-      console.log(`Usuario con ID ${userId}:`, docSnapshot.data());
-  } else {
-      console.error(`No se encontró el documento con ID: ${userId}`);
-  }
-  }
 
-//login
+export async function deleteUser(userId: string) {
+    const user = doc(db, "usuarios", userId);
+    await deleteDoc(user);
+    console.log(`Usuario con ID ${user} eliminado.`);
+}
 
-export const loginUser = async (email: string, password: string) => {
-  const q = query(collection(db, 'usuarios'), where('email', '==', email));
-  try {
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-      console.log('No se encontró un usuario con ese correo electrónico');
-      return;
+export async function loginUser(email: string, password: string) {
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        const token = await user.getIdToken();
+        console.log('Token de inicio de sesión:', token);
+    } catch (error) {
+        console.error('Error durante el inicio de sesión:', error);
     }
-    const userDoc = querySnapshot.docs[0];
-    const hashedPassword = userDoc.data().password;
-    const match = await bcrypt.compare(password, hashedPassword);
-    if (match) {
-      console.log('Inicio de sesión exitoso');
-      return userDoc.data();
+}
+
+export async function getUserData(userId: string) {
+    const user = doc(db, "usuarios", userId);
+    const docSnapshot = await getDoc(user);
+
+    if (docSnapshot.exists()) {
+        console.log(`Usuario con ID ${userId}:`, docSnapshot.data());
     } else {
-      console.log('Contraseña incorrecta');
-      return false;
+        console.error(`No se encontró el documento con ID: ${userId}`);
     }
-  } catch (error) {
-    console.error('Error al iniciar sesión: ', error);
+}
+
+export async function userExists(userId: string) {
+    const idQuery = query(usuariosCollection, where("id", "==", userId));
+    const querySnapshot = await getDocs(idQuery);
+    if (!querySnapshot.empty){
+        return true;
+    }
     return false;
-  }
-};
+}
+
