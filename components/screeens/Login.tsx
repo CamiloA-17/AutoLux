@@ -4,9 +4,9 @@ import { colorTextWhite } from "../tokens";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/validator/loginSchema";
-import { loginUser, getUsers } from "@/libs/api";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebaseConfig";
+import { useRouter } from "next/navigation";
 
 type Inputs = {
   email: string;
@@ -14,6 +14,9 @@ type Inputs = {
 };
 
 export function Login() {
+
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -29,12 +32,10 @@ export function Login() {
       const user = userCredential.user;
       const token = await user.getIdToken();      
 
+      localStorage.setItem('token', token);
+
       console.log('Token de inicio de sesión:', token);
-
-      
-      
-      // const response = await loginUser(data.email, data.password);
-
+      router.replace(`profile/${user.uid}`);
       
     } catch (error) {
       console.error('Error durante el login:', error);
