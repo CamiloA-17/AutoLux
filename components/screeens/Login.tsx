@@ -7,6 +7,7 @@ import { loginSchema } from "@/validator/loginSchema";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebaseConfig";
 import { useRouter } from "next/navigation";
+import { setCookie } from 'typescript-cookie'; 
 
 type Inputs = {
   email: string;
@@ -26,21 +27,28 @@ export function Login() {
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+
     try {
 
-      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
-      const user = userCredential.user;
-      const token = await user.getIdToken();      
+        const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
 
-      localStorage.setItem('token', token);
+        const user = userCredential.user;
 
-      console.log('Token de inicio de sesión:', token);
-      router.replace(`profile/${user.uid}`);
-      
+        const token = await user.getIdToken();
+
+        setCookie('token', token, { expires: 7 }); 
+
+        console.log('Token de inicio de sesión:', token);
+
+        router.replace(`profile/${user.uid}`);
+
     } catch (error) {
-      console.error('Error durante el login:', error);
+
+        console.error('Error durante el login:', error);
+
     }
-  };
+
+};
 
   return (
     <>
