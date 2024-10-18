@@ -15,6 +15,7 @@ export const createUser = async (name: string, id: string, email: string, passwo
                 name,
                 id,
                 email,
+                role: 'user'
             });
 
             return { success: true, message: 'Usuario registrado exitosamente' };
