@@ -3,7 +3,7 @@ import { query, where, addDoc, getDocs, collection, updateDoc, deleteDoc, doc, g
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebaseConfig";
 
-const usuariosCollection = collection(db, "usuarios");
+const usuariosCollection = collection(db, "users");
 
 export const createUser = async (name: string, id: string, email: string, password: string) => {
     try {

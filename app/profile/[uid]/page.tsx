@@ -1,6 +1,4 @@
 'use client'
-import { HeaderProfile } from '@/components';
-import { Footer } from '@/components';
 import { ProfileBody } from "@/components";
 import { Cookies, setCookie } from 'typescript-cookie'; 
 import { useEffect, useState } from "react";
@@ -43,12 +41,9 @@ export default function Profile() {
   return (
     <>
       <div className="flex flex-col min-h-screen">
-        <HeaderProfile />
         <main className="flex-1">
-          <button onClick={logout}>logout</button>
           <ProfileBody />
         </main>
-        <Footer />
       </div>
     </>
   );

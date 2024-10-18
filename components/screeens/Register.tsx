@@ -1,7 +1,7 @@
 'use client';
 import { colorTextWhite } from "../tokens";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { createUser } from "@/libs/api";
+import { createUser } from "@/libs/api_users";
 
 type Inputs = {
   name: string;
