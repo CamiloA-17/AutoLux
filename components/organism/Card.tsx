@@ -38,10 +38,10 @@ export function Card({vehicle, updateQuantity}: CardProps) {
               <p className={`${stylesForSubtitle}`}>{vehicle.zeroToHundredTime}</p>
               <p className={`${stylesForSubtitle}`}>{vehicle.horsepower}</p>
             </div>
-            {/* <div className={`${stylesForBlock}`}>
-              <p className={`${stylesForText}`}>{timeText}</p>
-              <p className={`${stylesForText}`}>{horsepowerText}</p>
-            </div> */}
+            <div className={`${stylesForBlock}`}>
+              <p className={`${stylesForText} text-xs mb-4`}>Velocidad 0 a 100 km/h</p>
+              <p className={`${stylesForText} text-xs mb-4`}>Caballos de fuerza</p>
+            </div>
             <hr className={`${spacer}`}/>
             <p className={`${stylesForText} text-xs mb-1`}>{vehicle.maxSpeed}</p>
             <p className={`${stylesForText} text-xs mb-4`}>{vehicle.engine}</p>

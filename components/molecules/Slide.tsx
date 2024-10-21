@@ -25,7 +25,7 @@ export function Slide() {
                 >
                     <SwiperSlide>
                         <div className="relative w-full h-[40vw]">
-                            <Image src={carro1} alt="Car 1" layout="fill" objectFit="cover" />
+                            <Image src={carro1} alt="Car 1" layout="fill" objectFit="cover" priority/>
                         </div>
                         <div className='text-center my-10 font-bold'>
                             <h1>Jaguar F-Type</h1>
@@ -34,7 +34,7 @@ export function Slide() {
 
                     <SwiperSlide>
                         <div className="relative w-full h-[40vw]">
-                            <Image src={carro2} alt="Car 2" layout="fill" objectFit="cover" />
+                            <Image src={carro2} alt="Car 2" layout="fill" objectFit="cover" priority />
                         </div>
                         <div className='text-center my-10 font-bold'>
                             <h1>Lamborghini Revuelto</h1>
@@ -42,7 +42,7 @@ export function Slide() {
                     </SwiperSlide>
                     <SwiperSlide>
                         <div className="relative w-full h-[40vw]">
-                            <Image src={carro3} alt="Car 3" layout="fill" objectFit="cover" />
+                            <Image src={carro3} alt="Car 3" layout="fill" objectFit="cover" priority />
                         </div>
                         <div className='text-center my-10 font-bold'>
                             <h1>Ferrari 812 Superfast</h1>
