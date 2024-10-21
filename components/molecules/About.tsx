@@ -28,7 +28,7 @@ export function About() {
         <div id="about" className={`${colorBggray} py-10 px-10 my-10`} ref={aboutRef}>
             <div className="container mx-auto flex items-center space-x-20">
                 <div className="flex-shrink-0">
-                    <Image src={logo} alt="Autolux Logo" className="w-60 h-auto" />
+                    <Image src={logo} alt="Autolux Logo" className="w-60 h-auto" priority />
                 </div>
                 <div className="text-center">
                     <h1 className="text-4xl font-semibold">AutoLux</h1>

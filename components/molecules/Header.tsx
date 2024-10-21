@@ -31,7 +31,10 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
 
         if (token){
             const userId = getUidFromToken(); 
+            
             setUid(userId);
+            console.log(uid);
+
         }
 
     }, []);
