@@ -28,7 +28,7 @@ export function ProfileBody() {
               <Image src={profileLogoPage} alt="Logo" className="" />
             </a>
             <h2 className={`mt-5 text-2xl font-extrabold text-center text-[#424242]`}>
-              Administrador
+              Usuario
             </h2>
           </div>
 

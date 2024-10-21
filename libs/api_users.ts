@@ -1,21 +1,25 @@
-import { db } from '../firebaseConfig';
 import { query, where, addDoc, getDocs, collection, updateDoc, deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebaseConfig";
+import { auth, db } from "@/firebaseConfig";
 
 const usuariosCollection = collection(db, "users");
 
 export const createUser = async (name: string, id: string, email: string, password: string) => {
     try {
-        if (!await userExists(id)) {
+        const user = doc(db, "users", id);
+        const docSnapshot = await getDoc(user);
+
+        if (!docSnapshot.exists()) {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
+
+            const defaultRoleDoc = doc(db, 'roles', '1');
 
             await setDoc(doc(db, 'users', user.uid), {
                 name,
                 id,
                 email,
-                role: 'user'
+                role: defaultRoleDoc
             });
 
             return { success: true, message: 'Usuario registrado exitosamente' };
@@ -70,20 +74,84 @@ export async function loginUser(email: string, password: string) {
 }
 
 export async function getUserData(userId: string) {
-    const user = doc(db, "usuarios", userId);
-    const docSnapshot = await getDoc(user);
+    try {
+        const user = doc(db, "users", userId);
+        const docSnapshot = await getDoc(user);
+        const userData = docSnapshot.data();
 
-    if (docSnapshot.exists()) {
-        console.log(`Usuario con ID ${userId}:`, docSnapshot.data());
-    } else {
-        console.error(`No se encontró el documento con ID: ${userId}`);
+        if (userData) {
+            const roleUser = doc(db, "roles", userData.role.id);
+            const roleSnapshot = await getDoc(roleUser);
+            const roleData = roleSnapshot.data();
+            return {
+                data: {
+                    ...userData,
+                    role: roleData
+                }
+            }
+        }
+
+        else {
+            return { data: "User not found" }
+        }
+    } catch (error) {
+        return {data: "Error"}
+    }
+
+}
+
+// export async function getUserRole(userId: string) {
+//     try {
+//         const user = doc(db, "users", userId);
+//         const docSnapshot = await getDoc(user);
+//         const userData = docSnapshot.data();
+
+//         if (userData) {
+//             const roleUser = doc(db, "roles", userData.role.id);
+//             const roleSnapshot = await getDoc(roleUser);
+//             const roleData = roleSnapshot.data();
+//             return {
+//                 code: 201, data: {
+//                     role: roleData
+//                 }
+//             }
+//         }
+
+//         else {
+//             return { code: 404, message: "User not found" }
+//         }
+//     } catch (error) {
+//         return {code: 500, message: "Error"}
+//     }
+// }
+
+export async function getUserRole(userId: string): Promise<string | null> {
+    try {
+        const userDoc = doc(db, "users", userId);
+        const userSnapshot = await getDoc(userDoc);
+        const userData = userSnapshot.data();
+
+        if (userData && userData.role) {
+            const roleDoc = doc(db, "roles", userData.role.id);
+            const roleSnapshot = await getDoc(roleDoc);
+            const roleData = roleSnapshot.data();
+
+            if (roleData && roleData.name) {
+                return roleData.name;
+            }
+        }
+
+        return null;
+    } catch (error) {
+        console.error('Error fetching user role:', error);
+        return null;
     }
 }
 
 export async function userExists(userId: string) {
     const idQuery = query(usuariosCollection, where("id", "==", userId));
     const querySnapshot = await getDocs(idQuery);
-    if (!querySnapshot.empty){
+    if (!querySnapshot.empty) {
         return true;
     }
     return false;
