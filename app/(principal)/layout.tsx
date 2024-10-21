@@ -7,7 +7,10 @@ export default function AuthLayout({
 }) {
     return (
         <main className="auth">
-            <Header />
+            <Header 
+                quantity={0}
+                showSearch={false}
+            />
             <section className='flex-1'>
                 {children}
             </section>

@@ -8,3 +8,9 @@ export type Vehicle = {
     engine: string;
     image: string;
 }
+
+export type Role = {
+    id: number;
+    name: string;
+    description: string;
+}
