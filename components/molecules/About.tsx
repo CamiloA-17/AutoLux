@@ -7,12 +7,14 @@ import { colorBggray } from '../tokens';
 import { useRef, useEffect } from 'react';
 
 export function About() {
-    const aboutRef = useRef(null);
+    const aboutRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleScrollToAbout = () => {
             if (window.location.hash === '#about') {
-                aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+                if (aboutRef.current) {
+                    aboutRef.current.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         };
 

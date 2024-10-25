@@ -18,17 +18,13 @@ export function LanguageSelector() {
     setSelectedLanguage(language);
     document.cookie = `NEXT_LOCALE=${language.code}; path=/`;
 
-    // Obtener la ruta actual
     const currentPath = window.location.pathname;
     
-    // Reemplazar el código de idioma en la ruta actual
     const newPath = currentPath.replace(/^\/(en|es)/, `/${language.code}`);
     
-    // Redirigir a la nueva ruta
     router.push(newPath);
   };
 
-  // Efecto para recuperar el idioma actual al cargar el componente
   useEffect(() => {
     const locale = document.cookie
       .split('; ')

@@ -34,7 +34,7 @@ export default function Profile() {
   useEffect(() => {
     if (uid) {
       getUserData(uid)
-        .then((data) => {
+        .then((data: any) => {
           
             setUserData(data.data);
         })
