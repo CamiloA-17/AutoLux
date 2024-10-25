@@ -31,7 +31,8 @@ export default function middleware(req: any) {
 
   const url = req.nextUrl.clone();
 
-  const currentLocale = req.cookies.NEXT_LOCALE || 'en'; 
+  const currentLocale = req.cookies.get('NEXT_LOCALE').value || 'en'; 
+  
 
   url.pathname = `/${currentLocale}${pathname}`;
 
