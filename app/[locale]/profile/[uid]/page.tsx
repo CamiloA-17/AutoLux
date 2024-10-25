@@ -27,7 +27,7 @@ export default function Profile() {
       const userId = getUidFromToken();
       setUid(userId);
     } else {
-      setLoading(false); // Si no hay token, finaliza la carga
+      setLoading(false);
     }
   }, []);
 
@@ -41,9 +41,9 @@ export default function Profile() {
         .catch((e) => {
           alert('Error al consultar la información del API');
         })
-        .finally(() => setLoading(false)); // Finaliza la carga independientemente del resultado
+        .finally(() => setLoading(false));
     } else {
-      setLoading(false); // Si no hay uid, finaliza la carga
+      setLoading(false); 
     }
   }, [uid]);
 
@@ -70,7 +70,6 @@ export default function Profile() {
     );
   }
 
-  // Aquí mantengo tu estructura de return
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -83,7 +82,7 @@ export default function Profile() {
             <div>No tienes acceso a esta página.</div>
           )}
           {!userData && (
-            <div>No estás logueado.</div>
+            <div>Cargando...</div>
           )}
         </main>
       </div>

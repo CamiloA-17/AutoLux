@@ -75,7 +75,7 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
                     ) : (
                         <>
                             <li>
-                                {(
+{/*                                 {(
 
                                     <div className="relative p-3 rounded shadow">
                                         <Image
@@ -88,7 +88,7 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
                                             {quantity}
                                         </span>
                                     </div>
-                                )}
+                                )} */}
                             </li>
                             <li>
                                 <a href={`/profile/${uid}`} className={`${colorTextWhite} px-4 py-2 border border-white rounded-full hover:bg-gray-700 ${colorBgblack}`}>
