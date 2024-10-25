@@ -15,5 +15,24 @@
         "confirm_password": "Confirmar contraseña",
         "login": "Iniciar sesión",
         "already_account": "¿Ya tienes una cuenta?"
+    },
+    "Header":{
+        "home": "Inicio",
+        "about": "Acerca de",
+        "store": "Tienda",
+        "sign_up": "Registrarse",
+        "login": "Iniciar sesión",
+        "logout": "Cerrar sesión",
+        "profile":  "Perfil"
+    },
+    "Footer":{
+        "category":  "Categorías",
+        "financing": "Financiación",
+        "credit": "Credito AutoLux",
+        "contact": "Contáctanos",
+        "allied_banks": "Bancos Aliados",
+        "social": "Redes Sociales",
+        "discounts": "Descuentos para Clientes",
+        "join": "Unete a Nosotros"
     }
 }
