@@ -16,29 +16,26 @@
 //     matcher: ['/profile/:path*'], 
 // };
 
-import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { routing } from './i18n/routing';
+import { NextResponse } from 'next/server';
 
 export default function middleware(req: any) {
   const { pathname } = req.nextUrl;
-  const localeMatch = pathname.match(/^\/(en|es)(\/|$)/);
-  
-  if (!localeMatch) {
-    const defaultLocale = 'en';
-    const url = req.nextUrl.clone();
-    url.pathname = `/${defaultLocale}${pathname}`;
-    return NextResponse.redirect(url);
-  } else {
-    const currentLocale = localeMatch[1];
-    const url = req.nextUrl.clone();
 
-    if (!url.pathname.startsWith(`/${currentLocale}`)) {
-      url.pathname = `/${currentLocale}${url.pathname}`;
-    }
+  const localeMatch = pathname.match(/^\/(es|en)(\/|$)/);
 
-    return NextResponse.rewrite(url);
+  if (localeMatch) {
+    return createMiddleware(routing)(req);
   }
+
+  const url = req.nextUrl.clone();
+
+  const currentLocale = req.cookies.NEXT_LOCALE || 'en'; 
+
+  url.pathname = `/${currentLocale}${pathname}`;
+
+  return NextResponse.redirect(url);
 }
 
 export const config = {
