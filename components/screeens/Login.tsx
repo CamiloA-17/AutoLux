@@ -11,7 +11,7 @@ import { setCookie, getCookie } from 'typescript-cookie';
 import { useEffect, useState } from 'react';
 import backgroundImage from '../../app/assets/images/backgroundReg.png';
 import { useTranslations } from "next-intl";
-
+import { LanguageSelector } from "../molecules/Language";
 
 type Inputs = {
   email: string;
@@ -62,6 +62,10 @@ export function Login() {
       className="flex min-h-screen flex-1 flex-col justify-center items-center bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundImage.src})` }}
     >
+        <div className="mb-10">
+        <LanguageSelector/>
+        </div>
+
       <div className="flex flex-col justify-center items-center bg-[#212121] w-[500px] h-[450px] rounded-[30px] bg-opacity-80">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className={`mt-5 text-center text-2xl font-extrabold leading-9 tracking-tight ${colorTextWhite}`}>
