@@ -6,6 +6,7 @@ import { colorBgblack, colorTextWhite } from '../tokens';
 import { useShoppingCarStore } from '@/store/shoppingCar';
 import { getCookie, removeCookie } from 'typescript-cookie';
 import { getUidFromToken } from '@/libs/decode_utils';
+import { useTranslations } from 'next-intl';
 
 
 type HeaderProps = {
@@ -22,7 +23,7 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
     const onShowProducts = () => {
         console.log('Productos en el carrito:', items);
     }
-
+    const t = useTranslations("Header");
     useEffect(() => {
 
         const token = getCookie('token');
@@ -55,20 +56,20 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
                     </a>
                 </div>
                 <ul className="flex items-center space-x-6">
-                    <li><a href="/home" className={`${colorTextWhite}`} >Home</a></li>
-                    <li><a href="/store" className={`${colorTextWhite}`} >Store</a></li>
-                    <li><a href="/home/#about" className={`${colorTextWhite}`}>About</a></li>
+                    <li><a href="/home" className={`${colorTextWhite}`} >{t("home")}</a></li>
+                    <li><a href="/store" className={`${colorTextWhite}`} >{t("store")}</a></li>
+                    <li><a href="/home/#about" className={`${colorTextWhite}`}>{t("about")}</a></li>
                     {!isLoggedIn ? (
                         <>
                             <li>
                                 <a href="/register" className="bg-white text-gray-900 px-4 py-2 rounded-full hover:bg-gray-300">
-                                    Sign Up
+                                    {t("sign_up")}
                                 </a>
                             </li>
                             <li>
                                 <a href="/login" className={`${colorTextWhite} px-4 py-2 border border-white rounded-full hover:bg-gray-700 ${colorBgblack}`}>
 
-                                    Login
+                                    {t("login")}
                                 </a>
                             </li>
                         </>
@@ -92,12 +93,12 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
                             </li>
                             <li>
                                 <a href={`/profile/${uid}`} className={`${colorTextWhite} px-4 py-2 border border-white rounded-full hover:bg-gray-700 ${colorBgblack}`}>
-                                    Perfil
+                                    {t("profile")}
                                 </a>
                             </li>
                             <li>
                                 <button onClick={handleLogout} className={`${colorTextWhite} px-4 py-2 border border-white rounded-full hover:bg-gray-700 ${colorBgblack}`}>
-                                    Logout
+                                    {t("logout")}
                                 </button>
                             </li>
                         </>
