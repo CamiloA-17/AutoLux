@@ -10,6 +10,8 @@ import { useRouter, usePathname } from "next/navigation";
 import { setCookie, getCookie } from 'typescript-cookie';
 import { useEffect, useState } from 'react';
 import backgroundImage from '../../app/assets/images/backgroundReg.png';
+import { useTranslations } from "next-intl";
+
 
 type Inputs = {
   email: string;
@@ -21,6 +23,7 @@ export function Login() {
   const pathname = usePathname();
   const [token, setToken] = useState<string | null>(null);
 
+  const t = useTranslations("Login");
   useEffect(() => {
     if (typeof window !== "undefined") {
       const tokenFromCookie = getCookie('token');
@@ -62,14 +65,14 @@ export function Login() {
       <div className="flex flex-col justify-center items-center bg-[#212121] w-[500px] h-[450px] rounded-[30px] bg-opacity-80">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className={`mt-5 text-center text-2xl font-extrabold leading-9 tracking-tight ${colorTextWhite}`}>
-            Login
+            {t("login")}
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form action="#" method="POST" className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <div>
               <label htmlFor="email" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                Correo electrónico
+                {t("email")}
               </label>
               <div className="mt-2">
                 <input
@@ -85,7 +88,7 @@ export function Login() {
             </div>
             <div>
               <label htmlFor="password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                Contraseña
+                {t("password")}
               </label>
               <div className="mt-2">
                 <input
@@ -102,13 +105,13 @@ export function Login() {
               type="submit"
               className={`flex w-full justify-center rounded-md bg-[#424242] px-3 py-1.5 text-sm font-extrabold leading-6 ${colorTextWhite} shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
             >
-              Login
+              {t("login")}
             </button>
           </form>
           <p className={`mt-10 text-center text-sm ${colorTextWhite}`}>
-            ¿No tienes cuenta?{' '}
+            {t("not_account")}{' '}
             <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-              Regístrate
+              {t("register")}
             </a>
           </p>
         </div>
