@@ -16,7 +16,7 @@ const carsDataHard = [
         zeroToHundredTime: 2.5,
         horsepower: 1001,
         maxSpeed: 350,
-        engine: 'Motor de combustión interna V12 6.5L',
+        engine: 'V12 6.5L',
         image: lamborghini,
     },
     {
@@ -26,7 +26,7 @@ const carsDataHard = [
         zeroToHundredTime: 2.5,
         horsepower: 1001,
         maxSpeed: 350,
-        engine: 'Motor de combustión interna V12 6.5L',
+        engine: 'V12 6.5L',
         image: lamborghini,
     },
     {
@@ -36,7 +36,7 @@ const carsDataHard = [
         zeroToHundredTime: 2.5,
         horsepower: 1001,
         maxSpeed: 350,
-        engine: 'Motor de combustión interna V12 6.5L',
+        engine: 'V12 6.5L',
         image: lamborghini,
     }
 ];

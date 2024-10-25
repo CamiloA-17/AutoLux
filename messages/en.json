@@ -34,5 +34,12 @@
         "social": "Social media",
         "discounts": "Discounts to customers",
         "join": "Join us"
+    },
+    "Card":{
+        "velocity": "0 to 100 km/h velocity",
+        "horsepower": "Horsepower",
+        "max_speed": "Maximum speed",
+        "add_to_car": "Add to cart",
+        "engine":  "internal combustion engine"
     }
 }
