@@ -1,0 +1,19 @@
+{
+    "Login": {
+        "login": "Iniciar sesión",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "register": "Registrarse",
+        "not_account": "¿No tienes una cuenta?"
+    },
+    "Register": {
+        "register": "Registrarse",
+        "name": "Nombre completo",
+        "id": "Cédula",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "confirm_password": "Confirmar contraseña",
+        "login": "Iniciar sesión",
+        "already_account": "¿Ya tienes una cuenta?"
+    }
+}

@@ -2,10 +2,11 @@
 import { colorTextWhite } from "../tokens";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { createUser } from "@/libs/api_users";
-import { setCookie, getCookie } from 'typescript-cookie';
+import { getCookie } from 'typescript-cookie';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from "next/navigation";
 import backgroundImage from '../../app/assets/images/backgroundReg.png';
+import { useTranslations } from "next-intl";
 
 type Inputs = {
   name: string;
@@ -19,6 +20,8 @@ export function Register() {
   const router = useRouter();
   const pathname = usePathname();
   const [token, setToken] = useState<string | null>(null);
+
+  const t = useTranslations("Register");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -64,7 +67,7 @@ export function Register() {
       <div className="flex flex-col justify-center items-center bg-[#212121] w-[500px] h-[670px] rounded-[30px] bg-opacity-80">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className={`mt-5 text-center text-2xl font-extrabold leading-9 tracking-tight ${colorTextWhite}`}>
-            Register
+            {t("register")}
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -74,7 +77,7 @@ export function Register() {
           >
             <div>
               <label htmlFor="full-name" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                Nombre Completo
+                {t("name")}
               </label>
               <div className="mt-2">
                 <input
@@ -93,7 +96,7 @@ export function Register() {
 
             <div>
               <label htmlFor="id" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                Cédula
+                {t("id")}
               </label>
               <div className="mt-2">
                 <input
@@ -110,7 +113,7 @@ export function Register() {
 
             <div>
               <label htmlFor="email" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                Correo electrónico
+                {t("email")}
               </label>
               <div className="mt-2">
                 <input
@@ -129,7 +132,7 @@ export function Register() {
 
             <div>
               <label htmlFor="password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                Contraseña
+                {t("password")}
               </label>
               <div className="mt-2">
                 <input
@@ -147,7 +150,7 @@ export function Register() {
 
             <div>
               <label htmlFor="confirm-password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                Confirmar contraseña
+                {t("confirm_password")}
               </label>
               <div className="mt-2">
                 <input
@@ -174,18 +177,18 @@ export function Register() {
                 type="submit"
                 className={`flex w-full justify-center rounded-md bg-[#424242] px-3 py-1.5 text-sm font-extrabold leading-6 ${colorTextWhite} shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
               >
-                Registrar
+                {t("register")}
               </button>
             </div>
           </form>
 
           <p className={`mt-10 text-center text-sm ${colorTextWhite}`}>
-            ¿Ya tienes cuenta?{" "}
+            {t("already_account")}{" "}
             <a
               href="/login"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Iniciar Sesión
+              {t("login")}
             </a>
           </p>
         </div>
