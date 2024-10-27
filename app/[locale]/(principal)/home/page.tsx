@@ -1,12 +1,6 @@
-import { Metadata } from "next"
 import { About, Slide , Adorno} from '@/components'
 
-export const metadata: Metadata = {
-  title: "Home",
-  description: "This is the home page"
-}
-
-export default function home() {
+export default function HomeContent() {
   return (
     <div className="my-10">
       <Slide />
