@@ -1,8 +1,13 @@
 import { query, where, addDoc, getDocs, collection, updateDoc, deleteDoc, doc, getDoc, setDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "@/firebaseConfig";
+import { User, UserRole } from "@/types/api_general";
 
 const usuariosCollection = collection(db, "users");
+const rolesCollection = collection(db, "roles");
+
+
+
 
 export const createUser = async (name: string, id: string, email: string, password: string) => {
     try {
@@ -34,12 +39,49 @@ export const createUser = async (name: string, id: string, email: string, passwo
     }
 };
 
-export async function getUsers() {
-    const all_users = await getDocs(usuariosCollection);
-    all_users.forEach((doc) => {
-        console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-    });
-}
+export const getUsers = async (): Promise<Array<User>> => {
+    const userDocs = await getDocs(usuariosCollection);
+    const usersArray: Array<User> = [];
+
+    for (const userDoc of userDocs.docs) {
+        const data = userDoc.data();
+
+        const roleRef = data.role;
+        console.log('log de la  referencia del rol', roleRef);
+        let roleData: UserRole | null = null;
+        if (roleRef) {
+            try {
+                const roleDoc = await getDoc(roleRef); 
+                console.log('Role Document:', roleDoc.data()); 
+                if (roleDoc.exists()) {
+                    const roleDocData = roleDoc.data() as UserRole;
+                    roleData = {
+                        id: roleDoc.id,
+                        nombre: roleDocData?.nombre || 'N/A',
+                        descripcion: roleDocData?.descripcion || 'N/A', 
+                    };
+                } else {
+                    console.error(`No existe el rol con ID: ${roleRef.id}`); 
+                }
+            } catch (error) {
+                console.error(`Error al obtener el rol para el usuario ${userDoc.id}:`, error); 
+            }
+        }
+
+        usersArray.push({
+            id: data.id, 
+            name: data.name, 
+            email: data.email, 
+            role: roleData || { 
+                id: 'N/A',
+                nombre: 'N/A',
+                descripcion: 'N/A',
+            },
+        });
+    }
+    return usersArray; 
+};
+
 
 export async function updateUser(userId: string, updatedData: { email?: string }) {
     const user = doc(db, "usuarios", userId);

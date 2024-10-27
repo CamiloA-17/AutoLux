@@ -1,23 +1,39 @@
 "use client";
 
-import { Metadata } from "next";
 import Image from 'next/image';
 import profileLogoPage from "../../app/assets/images/profileLogoPage.png";
 import { colorTextWhite } from "../tokens";
-import { colorTextRed } from "../tokens";
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
+import { getUsers } from '@/libs/api_users';
+import UserTable from './UserTable';
+import { User } from '@/types/api_general';
 
-const categories = [
+const categories: Array<{
+    id: number;
+    name: string;
+    items: string[] | { id: string; [key: string]: any }[];
+}> = [
     { id: 1, name: 'Inventario', items: ['Producto A', 'Producto B', 'Producto C'] },
-    { id: 2, name: 'Usuarios', items: ['Usuario 1', 'Usuario 2', 'Usuario 3'] },
+    { id: 2, name: 'Usuarios', items: [] },
     { id: 3, name: 'Ventas', items: ['Venta 1', 'Venta 2', 'Venta 3'] },
 ];
 
 export function SudoBody() {
     const [selected, setSelected] = useState(categories[0]);
+    const [users, setUsers] = useState<User[]>([]); 
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const usersArray = await getUsers();
+            setUsers(usersArray);
+        };
+
+        if (selected.name === 'Usuarios') {
+            fetchUsers();
+        }
+    }, [selected.name]);
 
     return (
         <>
@@ -72,25 +88,7 @@ export function SudoBody() {
                     </Listbox>
                 </div>
 
-                <div className="mt-10">
-                    <h3 className="text-lg font-semibold">Lista de {selected.name}:</h3>
-                    <div className="mt-4 overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-300">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Resultados</th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {selected.items.map((item, index) => (
-                                    <tr key={index}>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{item}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                {selected.name === 'Usuarios' && <UserTable users={users} selectedName={selected.name} />}
             </div>
         </>
     );
