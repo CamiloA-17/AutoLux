@@ -9,8 +9,15 @@ export type Vehicle = {
     image: string;
 }
 
-export type Role = {
-    id: number;
+export type UserRole = {
+    id: string;
+    nombre: string;
+    descripcion: string;
+};
+
+export type User = {
+    id: string;
     name: string;
-    description: string;
-}
+    email: string;
+    role: UserRole;
+};
