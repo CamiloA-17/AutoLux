@@ -45,8 +45,7 @@ export function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
       const user = userCredential.user;
       const token = await user.getIdToken();
-      setCookie('token', token, { expires: 7 });
-      setCookie('userId', user.uid, { expires: 7 });
+      setCookie('token', token, { expires: 7, sameSite: 'None', secure: true });
       router.replace(`/profile/${user.uid}`);
     } catch (error) {
       console.error('Error durante el login:', error);
