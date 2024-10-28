@@ -2,9 +2,9 @@ export type Vehicle = {
     id: number;
     name: string;
     model: string;
-    zeroToHundredTime: number;
+    zero_to_hundred_time: number;
     horsepower: number;
-    maxSpeed: number;
+    max_speed: number;
     engine: string;
     image: string;
 }
