@@ -19,5 +19,12 @@ export type User = {
     id: string;
     name: string;
     email: string;
+    password: string;
     role: UserRole;
+};
+
+export type Category = {
+    id: number;
+    name: string;
+    items: string[] | { id: string; [key: string]: any }[];
 };

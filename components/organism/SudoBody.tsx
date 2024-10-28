@@ -1,28 +1,27 @@
 "use client";
-
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import profileLogoPage from "../../app/assets/images/profileLogoPage.png";
 import { colorTextWhite } from "../tokens";
-import { useState, useEffect } from 'react';
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { getUsers } from '@/libs/api_users';
+import { createUser, getUsers } from '@/libs/api_users';
 import UserTable from './UserTable';
-import { User } from '@/types/api_general';
+import { Category, User, UserRole } from '@/types/api_general';
+import { CategorySelector } from '../molecules/CategorySelector';
+import UserForm from '../molecules/UserForm';
 
-const categories: Array<{
-    id: number;
-    name: string;
-    items: string[] | { id: string; [key: string]: any }[];
-}> = [
+const categories = [
     { id: 1, name: 'Inventario', items: ['Producto A', 'Producto B', 'Producto C'] },
     { id: 2, name: 'Usuarios', items: [] },
     { id: 3, name: 'Ventas', items: ['Venta 1', 'Venta 2', 'Venta 3'] },
 ];
 
 export function SudoBody() {
-    const [selected, setSelected] = useState(categories[0]);
-    const [users, setUsers] = useState<User[]>([]); 
+    const [selected, setSelected] = useState<Category>(categories[0]);
+    const [users, setUsers] = useState<User[]>([]);
+    const [isFormOpen, setIsFormOpen] = useState(false);
+    const [newUser, setNewUser] = useState<User>({ id: '', name: '', email: '', role: { id: '', nombre: '', descripcion: '' }, password: '' });
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -34,6 +33,58 @@ export function SudoBody() {
             fetchUsers();
         }
     }, [selected.name]);
+
+    const handleAddButtonClick = () => {
+        setIsFormOpen(true);
+    };
+
+    const handleFormClose = () => {
+        setIsFormOpen(false);
+        setNewUser({ id: '', name: '', email: '', role: { id: '', nombre: '', descripcion: '' }, password: '' });
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+    
+        if (name === 'role.nombre') {
+            let newRole: UserRole;
+            switch (value) {
+                case '/roles/1':
+                    newRole = { id: '1', nombre: 'Sudo', descripcion: 'Administrator role with all permissions' };
+                    break;
+                case '/roles/2':
+                    newRole = { id: '2', nombre: 'User', descripcion: 'Standard user role with limited permissions' };
+                    break;
+                case '/roles/3':
+                    newRole = { id: '3', nombre: 'Admin', descripcion: 'Administrator role with some permissions' };
+                    break;
+                default:
+                    newRole = { id: '', nombre: '', descripcion: '' };
+            }
+    
+            setNewUser((prev) => ({
+                ...prev,
+                role: newRole
+            }));
+        } else {
+            setNewUser((prev) => ({
+                ...prev,
+                [name]: value
+            }));
+        }
+    };
+
+    const handleFormSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const response = await createUser(newUser.name, newUser.id, newUser.email, newUser.password, newUser.role.id);
+        if (response.success) {
+            console.log('Usuario creado:', response.message);
+            handleFormClose();
+        } else {
+            console.error('Error al crear el usuario:', response.message);
+        }
+    };
+    
 
     return (
         <>
@@ -50,45 +101,34 @@ export function SudoBody() {
 
                     <button
                         type="submit"
-                        className={`flex w-[300px] h-[77px] justify-center items-center rounded-md bg-[#424242] ml-[300px] px-3 py-1.5 text-lg font-extrabold leading-6 ${colorTextWhite} shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                        className={`flex w-[300px] h-[77px] justify-center items-center rounded-md bg-[#424242] ml-[300px] px-3 py-1.5 text-lg font-extrabold leading-6 ${colorTextWhite} shadow-sm hover:bg-indigo-500`}
                     >
                         Editar Perfil
                     </button>
                 </div>
 
-                <div className="mt-10">
-                    <Listbox value={selected} onChange={setSelected}>
-                        <Label className="block text-sm font-medium leading-6 text-gray-900">Categoría</Label>
-                        <div className="relative mt-2">
-                            <ListboxButton className="relative cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm sm:leading-6">
-                                <span className="ml-3 block truncate">{selected.name}</span>
-                                <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
-                                    <ChevronUpDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400" />
-                                </span>
-                            </ListboxButton>
+                <CategorySelector categories={categories} selected={selected} onSelect={setSelected} />
 
-                            <ListboxOptions className="absolute z-10 mt-1 max-h-56 overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                {categories.map((category) => (
-                                    <ListboxOption
-                                        key={category.id}
-                                        value={category}
-                                        className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white"
-                                    >
-                                        <span className="ml-3 block truncate font-normal group-data-[selected]:font-semibold">
-                                            {category.name}
-                                        </span>
+                {selected.name === 'Usuarios' && (
+                    <>
+                        <button
+                            onClick={handleAddButtonClick}
+                            className="mt-5 mb-5 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+                        >
+                            Añadir Usuario
+                        </button>
+                        <UserTable users={users} selectedName={selected.name} />
+                    </>
+                )}
 
-                                        <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
-                                            <CheckIcon aria-hidden="true" className="h-5 w-5" />
-                                        </span>
-                                    </ListboxOption>
-                                ))}
-                            </ListboxOptions>
-                        </div>
-                    </Listbox>
-                </div>
-
-                {selected.name === 'Usuarios' && <UserTable users={users} selectedName={selected.name} />}
+                {isFormOpen && (
+                <UserForm
+                    newUser={newUser}
+                    onChange={handleInputChange}
+                    onClose={handleFormClose}
+                    onSave={handleFormSubmit}
+                />
+                )}
             </div>
         </>
     );
