@@ -104,7 +104,7 @@ export function Login() {
           </form>
           <p className={`mt-10 text-center text-sm ${colorTextWhite}`}>
             {t("not_account")}{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               {t("register")}
             </a>
           </p>

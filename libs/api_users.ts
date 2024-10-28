@@ -23,7 +23,7 @@ export const createUser = async (name: string, id: string, email: string, passwo
 
             const roleRef = doc(db, 'roles', roleId);
 
-            await setDoc(userDocRef, {
+            await setDoc(doc(db,'users', user.uid), {
                 name,
                 id,
                 email,
