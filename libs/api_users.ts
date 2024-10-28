@@ -7,9 +7,7 @@ const usuariosCollection = collection(db, "users");
 const rolesCollection = collection(db, "roles");
 
 
-
-
-export const createUser = async (name: string, id: string, email: string, password: string) => {
+export const createUser = async (name: string, id: string, email: string, password: string, role: string) => {
     try {
         const user = doc(db, "users", id);
         const docSnapshot = await getDoc(user);
@@ -24,7 +22,7 @@ export const createUser = async (name: string, id: string, email: string, passwo
                 name,
                 id,
                 email,
-                role: defaultRoleDoc
+                role
             });
 
             return { success: true, message: 'Usuario registrado exitosamente' };
@@ -47,12 +45,10 @@ export const getUsers = async (): Promise<Array<User>> => {
         const data = userDoc.data();
 
         const roleRef = data.role;
-        console.log('log de la  referencia del rol', roleRef);
         let roleData: UserRole | null = null;
         if (roleRef) {
             try {
                 const roleDoc = await getDoc(roleRef); 
-                console.log('Role Document:', roleDoc.data()); 
                 if (roleDoc.exists()) {
                     const roleDocData = roleDoc.data() as UserRole;
                     roleData = {
@@ -77,6 +73,7 @@ export const getUsers = async (): Promise<Array<User>> => {
                 nombre: 'N/A',
                 descripcion: 'N/A',
             },
+            password: data.password || 'N/A',
         });
     }
     return usersArray; 
