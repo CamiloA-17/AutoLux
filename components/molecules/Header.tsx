@@ -32,8 +32,7 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
     }, []);
 
     const handleLogout = () => {
-        removeCookie('token', { path: '/en' });
-        removeCookie('token', { path: '/es' });
+        removeCookie('token');
         window.location.reload();
     };
 

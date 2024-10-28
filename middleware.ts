@@ -16,6 +16,15 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  if (pathname.includes('/login') || pathname.includes('/register')) {
+    const token = request.cookies.get("token");
+
+    if (token) {
+      const url = new URL(`/home`, request.url);
+      return NextResponse.redirect(url);
+    }
+  }
+
   const intlResponse = intlMiddleware(request);
   if (intlResponse) return intlResponse;
 
