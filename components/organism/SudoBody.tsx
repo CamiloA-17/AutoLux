@@ -21,7 +21,7 @@ export function SudoBody() {
     const [selected, setSelected] = useState<Category>(categories[0]);
     const [users, setUsers] = useState<User[]>([]);
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [newUser, setNewUser] = useState<User>({ id: '', name: '', email: '', role: { id: '', nombre: '', descripcion: '' }, password: '' });
+    const [newUser, setNewUser] = useState<User>({ id: '', name: '', email: '', role: { id: '1', nombre: '', descripcion: '' }, password: '' });
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -43,36 +43,22 @@ export function SudoBody() {
         setNewUser({ id: '', name: '', email: '', role: { id: '', nombre: '', descripcion: '' }, password: '' });
     };
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    
+    const handleChange = (e:any) => {
         const { name, value } = e.target;
-    
-        if (name === 'role.nombre') {
-            let newRole: UserRole;
-            switch (value) {
-                case '/roles/1':
-                    newRole = { id: '1', nombre: 'Sudo', descripcion: 'Administrator role with all permissions' };
-                    break;
-                case '/roles/2':
-                    newRole = { id: '2', nombre: 'User', descripcion: 'Standard user role with limited permissions' };
-                    break;
-                case '/roles/3':
-                    newRole = { id: '3', nombre: 'Admin', descripcion: 'Administrator role with some permissions' };
-                    break;
-                default:
-                    newRole = { id: '', nombre: '', descripcion: '' };
-            }
-    
-            setNewUser((prev) => ({
+        if (name === "role") {
+            setNewUser ((prev) => ({
                 ...prev,
-                role: newRole
+                role: { id: value, nombre: "", descripcion: "" },
             }));
         } else {
-            setNewUser((prev) => ({
+            setNewUser ((prev) => ({
                 ...prev,
-                [name]: value
+                [name]: value,
             }));
         }
     };
+    
 
     const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -124,7 +110,7 @@ export function SudoBody() {
                 {isFormOpen && (
                 <UserForm
                     newUser={newUser}
-                    onChange={handleInputChange}
+                    onChange={handleChange}
                     onClose={handleFormClose}
                     onSave={handleFormSubmit}
                 />

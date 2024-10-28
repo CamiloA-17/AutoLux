@@ -7,7 +7,7 @@ type UserFormProps = {
         email: string;
         id: string; 
         role: {
-            nombre: string;
+            id: string;
         };
         password: string;
     };
@@ -59,14 +59,14 @@ const UserForm: React.FC<UserFormProps> = ({ newUser, onChange, onClose, onSave 
 
                 <label className="block text-sm font-medium text-gray-700">Rol</label>
                 <select
-                    name="role.nombre"
-                    value={newUser.role.nombre}
-                    onChange={onChange}
+                    name="role"
+                    value={newUser.role.id}
+                    onChange={(e) => onChange(e)}
                     className="mt-1 mb-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 >
-                    <option value="/roles/1">Sudo</option>
-                    <option value="/roles/2">User</option>
-                    <option value="/roles/3">Admin</option>
+                    <option value="3">Sudo</option>
+                    <option value="1">User</option>
+                    <option value="2">Admin</option>
                 </select>
 
                 <div className="flex justify-end space-x-2">

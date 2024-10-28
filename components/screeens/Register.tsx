@@ -42,17 +42,18 @@ export function Register() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { name, id, email, password } = data;
+    const defaultRoleId = "1";
 
-    const { success, message } = await createUser(name, id, email, password);
+    const { success, message } = await createUser(name, id, email, password, defaultRoleId);
 
     if (success) {
-      console.log('Usuario creado exitosamente:', message);
-      router.push('/login');
+        console.log('Usuario creado exitosamente:', message);
+        router.push('/login');
     } else {
-      console.error('Error al crear el usuario:', message);
-      alert(message);   
+        console.error('Error al crear el usuario:', message);
+        alert(message);   
     }
-  };
+};
 
   if (token) {
     return <p>Redirigiendo...</p>; 
