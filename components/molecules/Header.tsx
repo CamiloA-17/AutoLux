@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import logo from "../../app/assets/images/pixelcut-export.png";
+import profileIcon from "../../app/assets/images/profileLogo.png";
 import { colorBgblack, colorTextWhite } from '../tokens';
 import { useShoppingCarStore } from '@/store/shoppingCar';
 import { getCookie, removeCookie } from 'typescript-cookie';
@@ -18,6 +19,7 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
     const items = useShoppingCarStore((state) => state.items);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [uid, setUid] = useState<string | null>(null);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const t = useTranslations("Header");
 
     useEffect(() => {
@@ -32,6 +34,10 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
     const handleLogout = () => {
         removeCookie('token');
         window.location.reload();
+    };
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
     };
 
     return (
@@ -65,18 +71,20 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
                         </>
                     ) : (
                         <>
-                            <li>
-                                
-                            </li>
-                            <li>
-                                <a href={`/profile/${uid}`} className={`${colorTextWhite} px-4 py-2 border border-white rounded-full hover:bg-gray-700 ${colorBgblack}`}>
-                                    {t("profile")}
-                                </a>
-                            </li>
-                            <li>
-                                <button onClick={handleLogout} className={`${colorTextWhite} px-4 py-2 border border-white rounded-full hover:bg-gray-700 ${colorBgblack}`}>
-                                    {t("logout")}
+                            <li className="relative">
+                                <button onClick={toggleDropdown} className="flex items-center">
+                                    <Image src={profileIcon} alt="Profile Icon" className="w-8 h-8 rounded-full" />
                                 </button>
+                                {isDropdownOpen && (
+                                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-10">
+                                        <a href={`/profile/${uid}`} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                            {t("profile")}
+                                        </a>
+                                        <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                            {t("logout")}
+                                        </button>
+                                    </div>
+                                )}
                             </li>
                         </>
                     )}
