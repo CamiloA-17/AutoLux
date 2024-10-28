@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import { ProfileBody } from "@/components";
 import { Cookies, getCookie } from 'typescript-cookie';
 import { useEffect, useState } from "react";
@@ -9,15 +10,11 @@ import { SudoBody } from "@/components/organism/SudoBody";
 import { DocumentData } from "firebase/firestore";
 
 export default function Profile() {
+  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [uid, setUid] = useState<string | null>(null);
   const [userData, setUserData] = useState<DocumentData | null>(null);
-
-  const logout = () => {
-    Cookies.remove('token');
-    window.location.reload();
-  };
 
   useEffect(() => {
     const token = getCookie('token');
@@ -26,17 +23,22 @@ export default function Profile() {
     if (token) {
       const userId = getUidFromToken();
       setUid(userId);
+
+      const urlUid = window.location.pathname.split('/').pop();
+      if (urlUid !== userId) {
+        router.push('/');
+      }
+      
     } else {
       setLoading(false);
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (uid) {
       getUserData(uid)
         .then((data: any) => {
-          
-            setUserData(data.data);
+          setUserData(data.data);
         })
         .catch((e) => {
           alert('Error al consultar la información del API');
@@ -46,7 +48,7 @@ export default function Profile() {
       setLoading(false); 
     }
   }, [uid]);
-  
+
   return (
     <>
       <div className="flex flex-col min-h-screen">
@@ -54,7 +56,6 @@ export default function Profile() {
           {userData && userData.role.nombre === 'admin' && <AdminBody />}
           {userData && userData.role.nombre === 'sudo' && <SudoBody />}
           {userData && userData.role.nombre === 'user' && <ProfileBody />}
-          {/* Si no hay un rol coincidente, puedes agregar un mensaje o redirigir */}
           {userData && !['admin', 'sudo', 'user'].includes(userData.role.nombre) && (
             <div>No tienes acceso a esta página.</div>
           )}
