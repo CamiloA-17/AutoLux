@@ -32,9 +32,10 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
     }, []);
 
     const handleLogout = () => {
-        removeCookie('token');
+        removeCookie('token', { path: '/en' });
+        removeCookie('token', { path: '/es' });
         window.location.reload();
-    };
+    };
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
