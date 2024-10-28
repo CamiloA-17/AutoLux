@@ -1,10 +1,10 @@
-import { DaoVehicle } from "@/types/shoppingCar";
+import { Vehicle } from '@/types/api_general';
 import { create } from 'zustand';
 
 type ShoppingCarType = {
-    items: DaoVehicle[],
-    addItem: (item: DaoVehicle) => void,
-    removeItem: (item: DaoVehicle) => void
+    items: Vehicle[],
+    addItem: (item: Vehicle) => void,
+    removeItem: (item: Vehicle) => void
 }
 
 export const useShoppingCarStore = create<ShoppingCarType>((set) => ({
