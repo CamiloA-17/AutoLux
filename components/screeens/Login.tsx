@@ -24,19 +24,6 @@ export function Login() {
   const [token, setToken] = useState<string | null>(null);
 
   const t = useTranslations("Login");
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const tokenFromCookie = getCookie('token');
-      setToken(tokenFromCookie || null);
-
-      if (tokenFromCookie) {
-        const userId = getCookie('userId');
-        if (pathname.startsWith('/login')) {
-          router.replace(`/profile/${userId}`);
-        }
-      }
-    }
-  }, [router, pathname]);
 
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({ resolver: zodResolver(loginSchema) });
 
@@ -45,7 +32,11 @@ export function Login() {
       const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
       const user = userCredential.user;
       const token = await user.getIdToken();
-      setCookie('token', token, { expires: 7, sameSite: 'None', secure: true });
+      setCookie('token', token);
+
+      console.log('Login exitoso:', user);
+      console.log('Redirigiendo a:', `/profile/${user.uid}`);
+      
       router.replace(`/profile/${user.uid}`);
     } catch (error) {
       console.error('Error durante el login:', error);
