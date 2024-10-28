@@ -54,7 +54,6 @@ export default function Profile() {
           {userData && userData.role.nombre === 'admin' && <AdminBody />}
           {userData && userData.role.nombre === 'sudo' && <SudoBody />}
           {userData && userData.role.nombre === 'user' && <ProfileBody />}
-          {/* Si no hay un rol coincidente, puedes agregar un mensaje o redirigir */}
           {userData && !['admin', 'sudo', 'user'].includes(userData.role.nombre) && (
             <div>No tienes acceso a esta página.</div>
           )}
