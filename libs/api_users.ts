@@ -7,32 +7,35 @@ const usuariosCollection = collection(db, "users");
 const rolesCollection = collection(db, "roles");
 
 
-export const createUser = async (name: string, id: string, email: string, password: string, role: string) => {
+export const createUser = async (name: string, id: string, email: string, password: string, roleId: string) => {
+    console.log("hola",roleId)
     try {
-        const user = doc(db, "users", id);
-        const docSnapshot = await getDoc(user);
+        if (!roleId) {
+            throw new Error("Invalid role ID");
+        }
+        
+        const userDocRef = doc(db, "users", id);
+        const docSnapshot = await getDoc(userDocRef);
 
         if (!docSnapshot.exists()) {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            const defaultRoleDoc = doc(db, 'roles', '1');
+            const roleRef = doc(db, 'roles', roleId);
 
-            await setDoc(doc(db, 'users', user.uid), {
+            await setDoc(userDocRef, {
                 name,
                 id,
                 email,
-                role
+                role: roleRef
             });
 
             return { success: true, message: 'Usuario registrado exitosamente' };
         }
+
         return { success: false, message: 'El usuario ya existe' };
 
     } catch (error: any) {
-        if (error.code === 'auth/email-already-in-use') {
-            return { success: false, message: 'El correo ya está en uso' };
-        }
         return { success: false, message: error.message };
     }
 };
