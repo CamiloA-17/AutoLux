@@ -1,7 +1,7 @@
 'use client';
 import { colorTextWhite } from "../tokens";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { createUser } from "@/libs/api_users";
+import { createUser } from "@/utils/api_users";
 import { getCookie } from 'typescript-cookie';
 import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from "next/navigation";

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Card, SearchBar } from '@/components';
 import { Vehicle } from '@/types/api_general';
-import { getVehicles } from '@/libs/api_vehicles';
+import { getVehicles } from '@/utils/api_vehicles';
 
 export function StoreManagement() {
     const [carsData, setCarsData] = useState<Vehicle[]>([]);
