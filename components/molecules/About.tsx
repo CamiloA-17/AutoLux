@@ -1,10 +1,14 @@
 "use client";
 
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import logo from "../../app/assets/images/pixelcut-export.png";
 import { colorBggray } from '../tokens';
-import { useRef, useEffect } from 'react';
+import { fetchData } from '@/utils/api';
+import { User } from '@/types/api';
+import { Country } from '@/types/api';
+
+import { getData, postData, putData, deleteData } from '../../services/api'
 
 export function About() {
     const aboutRef = useRef<HTMLDivElement>(null);
@@ -26,6 +30,29 @@ export function About() {
         };
     }, []);
 
+    const getCountries = async () => {
+        try {
+          const countries = await getData<Country[]>('/country');
+          console.log(countries);
+        } catch (error) {
+          console.error('Error fetching country:', error);
+        }
+      };
+
+     const createCountry = async () => {
+        try {
+          const newCountry = await postData<Country, Country>('/country', {
+            id:9,
+            name: 'Pereira', 
+          });
+      
+          console.log('New country created:', newCountry);
+        } catch (error) {
+          console.error('Error creating country:', error);
+        }
+      };
+
+      
     return (
         <div id="about" className={`${colorBggray} py-10 px-10 my-10`} ref={aboutRef}>
             <div className="container mx-auto flex items-center space-x-20">
@@ -37,6 +64,7 @@ export function About() {
                     <p className="mt-4 text-gray-600 max-w-lg">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.
                     </p>
+                    <button onClick={createCountry} >hola countries</button>
                 </div>
             </div>
         </div>

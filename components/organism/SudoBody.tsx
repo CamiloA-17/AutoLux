@@ -5,7 +5,7 @@ import profileLogoPage from "../../app/assets/images/profileLogoPage.png";
 import { colorTextWhite } from "../tokens";
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { createUser, getUsers } from '@/libs/api_users';
+import { createUser, getUsers } from '@/utils/api_users';
 import UserTable from './UserTable';
 import { Category, User, UserRole } from '@/types/api_general';
 import { CategorySelector } from '../molecules/CategorySelector';
