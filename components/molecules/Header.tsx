@@ -42,7 +42,7 @@ export function Header({ quantity, showSearch = true }: HeaderProps) {
 
     return (
         <header className={`p-4 ${colorBgblack}`}>
-            <nav className="flex justify-between items-center">
+            <nav className="flex justify-between items-center flex-wrap">
                 <div className="logo">
                     <a href="/home">
                         <Image src={logo} alt="Logo" className="w-20 h-auto" />
