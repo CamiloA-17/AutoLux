@@ -6,7 +6,7 @@ import profileIcon from "../../app/assets/images/profileLogo.png";
 import { colorBgblack, colorTextWhite } from '../tokens';
 import { useShoppingCarStore } from '@/store/shoppingCar';
 import { getCookie, removeCookie } from 'typescript-cookie';
-import { getUidFromToken } from '@/libs/decode_utils';
+import { getUidFromToken } from '@/utils/decode_utils';
 import { useTranslations } from 'next-intl';
 import { LanguageSelector } from './Language';
 
