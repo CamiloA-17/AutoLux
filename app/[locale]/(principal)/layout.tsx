@@ -13,10 +13,7 @@ export default function HomeLayout({
 }) {
     return (
         <main className='flex flex-col min-h-screen'>
-            <Header 
-                quantity={0}
-                showSearch={false}
-            />
+            <Header/>
             <section className='flex-1'>
                 {children}
             </section>

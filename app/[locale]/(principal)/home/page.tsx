@@ -5,9 +5,7 @@ export default function HomeContent() {
     <div className="my-10">
       <Slide />
       <Adorno />
-      <main className="w-full max-w-screen-xl mx-auto flex flex-wrap mt-10 justify-center">
-        <About />
-      </main>
+      <About />
     </div>
   )
 }
