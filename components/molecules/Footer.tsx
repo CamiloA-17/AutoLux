@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export function Footer() {
     const t = useTranslations("Footer");
     return (
-        <footer className = {`text-gray-200 py-6 w-full bottom-0 ${colorBgblack}`}>
+        <footer className = {`text-gray-200 py-6 w-full relative bottom-0 ${colorBgblack}`}>
             <div className="container mx-auto px-6">
                 <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-1/4 mb-6 md:mb-0">

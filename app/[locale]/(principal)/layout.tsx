@@ -6,17 +6,14 @@ export const metadata: Metadata = {
     description: 'This is the home page',
   };
 
-export default function AuthLayout({
+export default function HomeLayout({
     children
 }: {
     children: React.ReactNode;
 }) {
     return (
-        <main className="auth">
-            <Header 
-                quantity={0}
-                showSearch={false}
-            />
+        <main className='flex flex-col min-h-screen'>
+            <Header/>
             <section className='flex-1'>
                 {children}
             </section>

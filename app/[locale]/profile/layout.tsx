@@ -13,10 +13,7 @@ export default function ProfileLayout({
 }) {
   return (
     <>
-      <Header
-        quantity={0}
-        showSearch={true}
-      />
+      <Header/>
       <main className="flex-1">
         <section>
           {children}
