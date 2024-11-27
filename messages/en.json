@@ -41,5 +41,8 @@
         "max_speed": "Maximum speed",
         "add_to_car": "Add to cart",
         "engine":  "internal combustion engine"
+    },
+    "About":{
+        "about": "AutoLux is your ultimate vehicle encyclopedia. Here you will find detailed information about a wide variety of cars, from timeless classics to the most modern and advanced models. Explore technical specifications, vehicle history, comparisons, and much more."
     }
 }
