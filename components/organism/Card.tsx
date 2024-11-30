@@ -3,9 +3,7 @@
 import React from "react"; 
 import Link from "next/link";
 import Image from "next/image";
-import { useShoppingCarStore } from "@/store/shoppingCar";
-import { Vehicle } from "@/types/api_general";
-import { DaoVehicle } from "@/types/shoppingCar";
+import { Vehicle } from '@/types/api';
 import { hooverForCard, spacer, stylesForBlock, stylesForCard, stylesForSubtitle, stylesForText, stylesForTitle } from "../tokens";
 import { useTranslations } from "next-intl";
 import type { StaticImageData } from 'next/image';
@@ -25,12 +23,6 @@ type CardProps = {
 };
 
 export function Card({ vehicle, updateQuantity }: CardProps) {
-  const addVehicle = useShoppingCarStore((state) => state.addItem);
-
-  const onAddToCart = (vehicle: Vehicle) => {
-    addVehicle(vehicle);
-  };
-
   const t = useTranslations("Card");
 
   const vehicleImage = imageMap[vehicle.image] || jaguar;
@@ -43,15 +35,15 @@ export function Card({ vehicle, updateQuantity }: CardProps) {
           <p className={`${stylesForTitle}`}>{vehicle.name}</p>
           <hr className={`${spacer}`} />
           <div className={`${stylesForBlock}`}>
-            <p className={`${stylesForSubtitle}`}>{vehicle.zero_to_hundred_time}</p>
-            <p className={`${stylesForSubtitle}`}>{vehicle.horsepower}</p>
+            <p className={`${stylesForSubtitle}`}>{vehicle.acceleration}</p>
+            <p className={`${stylesForSubtitle}`}>{vehicle.hp}</p>
           </div>
           <div className={`${stylesForBlock}`}>
             <p className={`${stylesForText} text-xs mb-4`}>{t("velocity")}</p>
             <p className={`${stylesForText} text-xs mb-4`}>{t("horsepower")}</p>
           </div>
           <hr className={`${spacer}`} />
-          <p className={`${stylesForText} text-xs mb-1`}>{t("max_speed")} {vehicle.max_speed}</p>
+          <p className={`${stylesForText} text-xs mb-1`}>{t("max_speed")} {vehicle.topSpeed}</p>
           <p className={`${stylesForText} text-xs mb-4`}>{t("engine")} {vehicle.engine}</p>
         </div>
       </Link>

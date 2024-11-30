@@ -1,4 +1,4 @@
-import { Login } from "@/components/screeens/Login";
+import { Login } from "@/components/screens/Login";
 
 export default function LoginForm() {
 

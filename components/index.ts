@@ -5,13 +5,11 @@ export * from './molecules/About'
 export * from './molecules/Footer';
 export * from './molecules/About';
 export * from './molecules/Slide'
-export * from './screeens/Login'
-export * from './screeens/Register'
+export * from './screens/Login'
+export * from './screens/Register'
 export * from './organism/ProfileBody'
 export * from './molecules/Slide';
 export * from './molecules/SearchBar';
-export * from './screeens/Register';
-export * from './screeens/Login';
 export * from './organism/Card';
 export * from './organism/Store';
 export * from './atoms/Adorno';

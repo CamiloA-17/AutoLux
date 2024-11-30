@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { ContentContainer } from "@/components/organism/ContentContainer";
+import { StoreManagement } from "@/components";
 
 export const metadata: Metadata = {
   title: "Store",
@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function Store() {
   return (
-    <main>
-      <ContentContainer />
+    <main className="flex flex-col lg:flex-row min-h-screen p-4">
+      <StoreManagement />
     </main>
   );
 }
