@@ -19,24 +19,22 @@ export function StoreManagement() {
     }, []);
 
     useEffect(() => {
-        filterCars();
+        filterCars(); 
     }, [selectedBrand, searchQuery, carsData]);
 
     const getVehicles = async () => {
         try {
             const cars = await getData<Vehicle[]>('/vehicle/');
             setCarsData(cars);
-            setFilteredCars(cars);
         } catch (error) {
             console.error('Error fetching cars:', error);
         }
     };
 
-
     const getBrands = async () => {
         try {
             const brands = await getData<Brand[]>('/brand/');
-            setBrands(brands);
+            setBrands(brands); 
         } catch (error) {
             console.error('Error fetching brands:', error);
         }
@@ -44,21 +42,19 @@ export function StoreManagement() {
 
     const filterCars = () => {
         const result = carsData.filter((car) => {
-            const matchesBrand = selectedBrand == null || car.marcaId == selectedBrand;
-            console.log();
-            
+            const matchesBrand = selectedBrand ? car.marcaId === selectedBrand : true;
             const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
             return matchesBrand && matchesSearch;
         });
-        setFilteredCars(result);
+        setFilteredCars(result); 
     };
 
     const handleSearch = (query: string) => {
-        setSearchQuery(query); // Actualiza el estado del término de búsqueda
+        setSearchQuery(query); 
     };
 
     const handleFilterClick = (id: number) => {
-        setSelectedBrand(id); // Actualiza el estado de la marca seleccionada
+        setSelectedBrand(id); 
     };
 
     return (
@@ -69,9 +65,13 @@ export function StoreManagement() {
             <section className="w-full lg:w-3/4">
                 <SearchBar onSearch={handleSearch} />
                 <div className="flex flex-wrap flex-1 gap-5 p-5">
-                    {filteredCars.map((car) => (
-                        <Card key={car.id} vehicle={car} updateQuantity={() => { }} />
-                    ))}
+                    {filteredCars.length > 0 ? (
+                        filteredCars.map((car) => (
+                            <Card key={car.id} vehicle={car} updateQuantity={() => { }} />
+                        ))
+                    ) : (
+                        <p>No cars found</p> 
+                    )}
                 </div>
             </section>
         </div>

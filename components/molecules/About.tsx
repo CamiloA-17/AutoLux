@@ -29,29 +29,6 @@ export function About() {
     };
   }, []);
 
-  const getCountries = async () => {
-    try {
-      const countries = await getData<Country[]>('/country/');
-      console.log(countries);
-    } catch (error) {
-      console.error('Error fetching country:', error);
-    }
-  };
-
-  const createCountry = async () => {
-    try {
-      const newCountry = await postData<Country, Country>('/country', {
-        id: 9,
-        name: 'Pereira',
-      });
-
-      console.log('New country created:', newCountry);
-    } catch (error) {
-      console.error('Error creating country:', error);
-    }
-  };
-
-
   return (
     <div id="about" className={`${colorBggray} py-10 px-10 my-10`} ref={aboutRef}>
       <div className="container mx-auto flex flex-col items-center space-y-10 md:space-x-20">
@@ -63,9 +40,6 @@ export function About() {
           <p className="mt-4 text-gray-600 max-w-lg">
             {t('about')}
           </p>
-          <button onClick={getCountries} className="mt-4 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700">
-            Hola countries
-          </button>
         </div>
       </div>
     </div>
