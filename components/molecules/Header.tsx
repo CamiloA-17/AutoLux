@@ -100,7 +100,7 @@ export function Header() {
                             <li className="h-12 flex items-center">
                                 <a
                                     href="/login"
-                                    className={`${colorTextWhite} border-white rounded-full px-4 py-2 border hover:bg-gray-700 ${colorBgblack} h-full flex items-center}`}
+                                    className={`${colorTextWhite} border-white rounded-full px-4 py-2 border hover:bg-gray-700 ${colorBgblack} h-full flex items-center`}
                                 >
                                     {t("login")}
                                 </a>

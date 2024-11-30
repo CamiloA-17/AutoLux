@@ -10,6 +10,8 @@
         "register": "Register",
         "email": "Email",
         "name": "Full name",
+        "last_name": "Last name",
+        "birth_date": "Birth date",
         "id": "ID",
         "password": "Password",
         "confirm_password": "Confirm password",

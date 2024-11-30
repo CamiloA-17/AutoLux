@@ -9,6 +9,8 @@
     "Register": {
         "register": "Registrarse",
         "name": "Nombre completo",
+        "last_name": "Apellido",
+        "birth_date": "Fecha de nacimiento",
         "id": "Cédula",
         "email": "Correo electrónico",
         "password": "Contraseña",
