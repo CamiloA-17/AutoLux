@@ -5,7 +5,6 @@ import profileLogoPage from "../../app/assets/images/profileLogoPage.png";
 import { colorTextWhite } from "../tokens";
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import { createUser, getUsers } from '@/utils/api_users';
 import UserTable from './UserTable';
 import { Category, User, UserRole } from '@/types/api_general';
 import { CategorySelector } from '../molecules/CategorySelector';
@@ -23,16 +22,6 @@ export function SudoBody() {
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [newUser, setNewUser] = useState<User>({ id: '', name: '', email: '', role: { id: '1', nombre: '', descripcion: '' }, password: '' });
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            const usersArray = await getUsers();
-            setUsers(usersArray);
-        };
-
-        if (selected.name === 'Usuarios') {
-            fetchUsers();
-        }
-    }, [selected.name]);
 
     const handleAddButtonClick = () => {
         setIsFormOpen(true);
@@ -61,20 +50,20 @@ export function SudoBody() {
     
 
     const handleFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        const response = await createUser(newUser.name, newUser.id, newUser.email, newUser.password, newUser.role.id);
-        if (response.success) {
-            console.log('Usuario creado:', response.message);
-            handleFormClose();
-        } else {
-            console.error('Error al crear el usuario:', response.message);
-        }
+        // e.preventDefault();
+        // const response = await createUser(newUser.name, newUser.id, newUser.email, newUser.password, newUser.role.id);
+        // if (response.success) {
+        //     console.log('Usuario creado:', response.message);
+        //     handleFormClose();
+        // } else {
+        //     console.error('Error al crear el usuario:', response.message);
+        // }
     };
     
 
     return (
         <>
-            <div className="mx-5 my-10">
+            {/* <div className="mx-5 my-10">
                 <div className="flex justify-center items-center">
                     <div className="flex flex-col items-center justify-center px-10 py-10">
                         <a className="flex justify-center w-[250px]" href="/profile">
@@ -115,7 +104,7 @@ export function SudoBody() {
                     onSave={handleFormSubmit}
                 />
                 )}
-            </div>
+            </div> */}
         </>
     );
 }

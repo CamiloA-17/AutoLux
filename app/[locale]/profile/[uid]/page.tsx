@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { ProfileBody } from "@/components";
 import { Cookies, getCookie } from 'typescript-cookie';
 import { useEffect, useState } from "react";
-import { getUserData } from "@/utils/api_users";
 import { getUidFromToken } from "@/utils/decode_utils";
 import { AdminBody } from "@/components/organism/AdminBody";
 import { SudoBody } from "@/components/organism/SudoBody";
@@ -33,21 +32,6 @@ export default function Profile() {
       setLoading(false);
     }
   }, [router]);
-
-  useEffect(() => {
-    if (uid) {
-      getUserData(uid)
-        .then((data: any) => {
-          setUserData(data.data);
-        })
-        .catch((e) => {
-          alert('Error al consultar la información del API');
-        })
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false); 
-    }
-  }, [uid]);
 
   return (
     <>

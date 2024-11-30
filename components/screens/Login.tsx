@@ -5,13 +5,15 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/validator/loginSchema";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebaseConfig";
 import { useRouter, usePathname } from "next/navigation";
 import { setCookie, getCookie } from 'typescript-cookie';
 import { useEffect, useState } from 'react';
 import backgroundImage from '../../app/assets/images/backgroundReg.png';
 import { useTranslations } from "next-intl";
 import { LanguageSelector } from "../molecules/Language";
+import { postData } from "@/services/api";
+import type { Login, LoginResponse } from "@/types/api";
+
 
 type Inputs = {
   email: string;
@@ -29,15 +31,12 @@ export function Login() {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
-      const user = userCredential.user;
-      const token = await user.getIdToken();
+      const login = await postData<Login, LoginResponse>('/auth/login', data);
+      console.log('Login exitoso:', login);
+      setToken(login.token);
       setCookie('token', token);
-
-      console.log('Login exitoso:', user);
-      console.log('Redirigiendo a:', `/profile/${user.uid}`);
       
-      router.replace(`/profile/${user.uid}`);
+      // router.replace(`/profile/${user.uid}`);
     } catch (error) {
       console.error('Error durante el login:', error);
     }

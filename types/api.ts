@@ -26,14 +26,37 @@ export interface Role {
   description: string;
 }
 
-export interface Auth {
+export interface Register {
   id: string;
   name: string;
-  lastName: string;
+  last_name: string;
   email: string;
   age: number;
   password: string;
-  roleId: number;
+  role_id: number;
+}
+
+export interface RegisterResponse {
+  message: string;
+  data: {
+    name: string;
+    password: string;
+    role_id: number;
+    id: string;
+    last_name: string;
+    email: string;
+    age: number;
+  };
+}
+
+export interface Login {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  refreshToken: string;
 }
 
 export interface User {
