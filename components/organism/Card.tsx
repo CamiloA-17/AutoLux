@@ -29,7 +29,7 @@ export function Card({ vehicle, updateQuantity }: CardProps) {
 
   return (
     <article className={`${stylesForCard} ${hooverForCard}`}>
-      <Link href={`store/${vehicle.id}`}>
+      <Link href={`cars/${vehicle.id}`}>
         <Image className="rounded-t-md w-full h-32 object-cover" src={vehicleImage} alt={vehicle.name} />
         <div className="p-4 flex flex-col flex-grow">
           <p className={`${stylesForTitle}`}>{vehicle.name}</p>

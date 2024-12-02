@@ -2,8 +2,8 @@ import { Metadata } from "next";
 import { StoreManagement } from "@/components";
 
 export const metadata: Metadata = {
-  title: "Store",
-  description: "This is the place to sell the cars",
+  title: "Car",
+  description: "This is the place were the information of the wiki is available",
 };
 
 export default function Store() {

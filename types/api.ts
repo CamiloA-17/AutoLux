@@ -82,9 +82,9 @@ export interface Comment {
 export interface Vehicle {
   id: number;
   name: string;
-  marcaId: number;
+  marca_id: number;
   modelo: number;
-  topSpeed: number;
+  top_speed: number;
   engine: string;
   hp: number;
   image: string;
