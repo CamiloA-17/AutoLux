@@ -31,7 +31,7 @@ const imageMap: { [key: string]: StaticImageData } = {
   roadster: Tesla_Roadste,
   dbs_superleggera: Aston_Martin_DBS_Superleggera,
   dbx707: Aston_Martin_DBX707,
-  jaguar: jaguar
+  jaguar: jaguar,
 };
 
 type CardProps = {
