@@ -60,7 +60,7 @@ export function Card({ vehicle, updateQuantity }: CardProps) {
             <p className={`${stylesForText} text-xs mb-4`}>{t("horsepower")}</p>
           </div>
           <hr className={`${spacer}`} />
-          <p className={`${stylesForText} text-xs mb-1`}>{t("max_speed")} {vehicle.topSpeed}</p>
+          <p className={`${stylesForText} text-xs mb-1`}>{t("max_speed")} {vehicle.top_speed}</p>
           <p className={`${stylesForText} text-xs mb-4`}>{t("engine")} {vehicle.engine}</p>
         </div>
       </Link>
