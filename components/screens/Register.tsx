@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from "next/navigation";
 import backgroundImage from '../../app/assets/images/backgroundReg.png';
 import { useTranslations } from "next-intl";
-import { LanguageSelector } from "../molecules/Language";
+import { LanguageSelector } from "@/components/molecules/Language";
 import { postData } from "@/services/api";
 import type { Register, RegisterResponse } from "@/types/api";
 
@@ -52,25 +52,8 @@ export function Register() {
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
-    console.log('Edad:', age);
-
     return age;
   };
-
-  //   const onSubmit: SubmitHandler<Inputs> = async (data) => {
-  //     const { name, id, email, password } = data;
-  //     const defaultRoleId = "1";
-
-  //     const { success, message } = await createUser(name, id, email, password, defaultRoleId);
-
-  //     if (success) {
-  //         console.log('Usuario creado exitosamente:', message);
-  //         router.push('/login');
-  //     } else {
-  //         console.error('Error al crear el usuario:', message);
-  //         alert(message);   
-  //     }
-  // };
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { name, lastName, birthdate, id, email, password } = data;
@@ -102,178 +85,159 @@ export function Register() {
 
   return (
     <div
-      className="flex min-h-screen flex-1 flex-col justify-center items-center bg-cover bg-center"
+      className="flex min-h-screen flex-1 flex-col justify-center items-center bg-cover bg-center p-4"
       style={{ backgroundImage: `url(${backgroundImage.src})` }}
     >
-
-      <div className="mb-10">
-        <LanguageSelector />
-      </div>
-      <div className="flex flex-col justify-center items-center bg-[#212121] w-[500px] h-[670px] rounded-[30px] bg-opacity-80">
+      <div className="flex flex-col justify-center items-center bg-[#212121] w-full max-w-[500px] sm:max-w-[90%] lg:max-w-[500px] h-auto rounded-[30px] bg-opacity-80 p-6">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className={`mt-5 text-center text-2xl font-extrabold leading-9 tracking-tight ${colorTextWhite}`}>
             {t("register")}
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            className="space-y-6"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div>
-              <label htmlFor="full-name" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                {t("name")}
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register("name", { required: "Nombre requerido" })}
-                  id="full-name"
-                  type="text"
-                  autoComplete="name"
-                  placeholder="John"
-                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="full-name" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
+                  {t("name")}
+                </label>
+                <div className="mt-2">
+                  <input
+                    {...register("name", { required: "Nombre requerido" })}
+                    id="full-name"
+                    type="text"
+                    autoComplete="name"
+                    placeholder="John"
+                    className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
               </div>
-              {errors.name && (
-                <span className="text-red-500 text-sm">{errors.name.message}</span>
-              )}
+
+              <div>
+                <label htmlFor="last_name" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
+                  {t("last_name")}
+                </label>
+                <div className="mt-2">
+                  <input
+                    {...register("lastName", { required: "Apellido requerido" })}
+                    id="last_name"
+                    type="text"
+                    autoComplete="last_name"
+                    placeholder="Doe"
+                    className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                {errors.lastName && <span className="text-red-500 text-sm">{errors.lastName.message}</span>}
+              </div>
+
+              <div>
+                <label htmlFor="birthdate" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
+                  {t("birth_date")}
+                </label>
+                <div className="mt-2">
+                  <input
+                    {...register("birthdate", { required: "Fecha de nacimiento requerida" })}
+                    id="birthdate"
+                    type="date"
+                    autoComplete="bday"
+                    className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                {errors.birthdate && <span className="text-red-500 text-sm">{errors.birthdate.message}</span>}
+              </div>
+
+              <div>
+                <label htmlFor="id" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
+                  {t("id")}
+                </label>
+                <div className="mt-2">
+                  <input
+                    {...register("id", { required: "Cédula requerida" })}
+                    id="id"
+                    type="text"
+                    className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                {errors.id && <span className="text-red-500 text-sm">{errors.id.message}</span>}
+              </div>
+
+              <div>
+                <label htmlFor="email" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
+                  {t("email")}
+                </label>
+                <div className="mt-2">
+                  <input
+                    {...register("email", { required: "Correo requerido" })}
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="example@example.com"
+                    className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+              </div>
+
+              <div>
+                <label htmlFor="password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
+                  {t("password")}
+                </label>
+                <div className="mt-2">
+                  <input
+                    {...register("password", { required: "Contraseña requerida" })}
+                    id="password"
+                    type="password"
+                    autoComplete="new-password"
+                    className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+              </div>
+
+              <div>
+                <label htmlFor="confirmPassword" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
+                  {t("confirm_password")}
+                </label>
+                <div className="mt-2">
+                  <input
+                    {...register("confirmPassword", {
+                      required: "Confirmación de contraseña requerida",
+                      validate: (value) => value === password || "Las contraseñas no coinciden",
+                    })}
+                    id="confirmPassword"
+                    type="password"
+                    autoComplete="new-password"
+                    className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+                {errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
+              </div>
             </div>
 
-            <div>
-              <label htmlFor="last_name" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                {t("last_name")}
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register("lastName", { required: "Apellido requerido" })}
-                  id="last_name"
-                  type="text"
-                  autoComplete="last_name"
-                  placeholder="Doe"
-                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-              {errors.lastName && (
-                <span className="text-red-500 text-sm">{errors.lastName.message}</span>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="birthdate" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                {t("birth_date")}
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register("birthdate", { required: "Fecha de nacimiento requerida" })}
-                  id="birthdate"
-                  type="date"
-                  autoComplete="bday"
-                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-              {errors.birthdate && (
-                <span className="text-red-500 text-sm">{errors.birthdate.message}</span>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="id" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                {t("id")}
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register("id", { required: "Cédula requerida" })}
-                  id="id"
-                  type="text"
-                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-              {errors.id && (
-                <span className="text-red-500 text-sm">{errors.id.message}</span>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="email" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                {t("email")}
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register("email", { required: "Correo requerido" })}
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="example@example.com"
-                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-              {errors.email && (
-                <span className="text-red-500 text-sm">{errors.email.message}</span>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                {t("password")}
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register("password", { required: "Contraseña requerida" })}
-                  id="password"
-                  type="password"
-                  autoComplete="new-password"
-                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-              {errors.password && (
-                <span className="text-red-500 text-sm">{errors.password.message}</span>
-              )}
-            </div>
-
-            <div>
-              <label htmlFor="confirm-password" className={`block text-sm font-medium leading-6 ${colorTextWhite}`}>
-                {t("confirm_password")}
-              </label>
-              <div className="mt-2">
-                <input
-                  {...register("confirmPassword", {
-                    required: "Confirmación requerida",
-                    validate: (value) =>
-                      value === password || "Las contraseñas no coinciden",
-                  })}
-                  id="confirm-password"
-                  type="password"
-                  autoComplete="new-password"
-                  className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-              {errors.confirmPassword && (
-                <span className="text-red-500 text-sm">
-                  {errors.confirmPassword.message}
-                </span>
-              )}
-            </div>
-
-            <div>
+            <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className={`flex w-full justify-center rounded-md bg-[#424242] px-3 py-1.5 text-sm font-extrabold leading-6 ${colorTextWhite} shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                className="w-full rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-600"
               >
                 {t("register")}
               </button>
             </div>
           </form>
-
-          <p className={`mt-10 text-center text-sm ${colorTextWhite}`}>
-            {t("already_account")}{" "}
-            <a
-              href="/login"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              {t("login")}
-            </a>
-          </p>
         </div>
+
+        <p className={`mt-10 text-center text-sm ${colorTextWhite}`}>
+          {t("already_account")}{" "}
+          <a
+            href="/login"
+            className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+          >
+            {t("login")}
+          </a>
+        </p>
+      </div>
+      <div className="fixed top-0 left-0 m-4">
+        <LanguageSelector />
       </div>
     </div>
   );
