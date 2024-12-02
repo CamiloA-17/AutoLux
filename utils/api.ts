@@ -9,6 +9,7 @@ export async function fetchData<T>(
           "Content-Type": "application/json",
           ...options.headers,
         },
+        mode: 'cors',
         ...options,
       });
   
