@@ -10,9 +10,10 @@ import type { StaticImageData } from 'next/image';
 import lamborghini from '../../app/assets/images/lamborghini-revuelto.svg';
 import jaguar from '../../app/assets/images/f-type-r-dynamic.svg';
 import ferrari from '../../app/assets/images/ferrari-812-superfast.jpg';
+import Lamborghini_Huracán_Evo from '../../app/assets/images/huracan_evo.jpg';
 
 const imageMap: { [key: string]: StaticImageData } = {
-  lamborghini: lamborghini,
+  huracan_evo: Lamborghini_Huracán_Evo,
   jaguar: jaguar,
   ferrari: ferrari,
 };

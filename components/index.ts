@@ -13,3 +13,5 @@ export * from './molecules/SearchBar';
 export * from './organism/Card';
 export * from './organism/Store';
 export * from './atoms/Adorno';
+export * from './organism/comments';
+export * from './organism/AdminBody';

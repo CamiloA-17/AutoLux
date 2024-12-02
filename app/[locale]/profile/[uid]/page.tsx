@@ -1,6 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { ProfileBody } from "@/components";
+import { ProfileBody } from "@/components/organism/ProfileBody";
 import { Cookies, getCookie } from 'typescript-cookie';
 import { useEffect, useState } from "react";
 import { getUidFromToken } from "@/utils/decode_utils";
