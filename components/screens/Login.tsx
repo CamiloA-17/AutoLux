@@ -4,17 +4,14 @@ import { colorTextWhite } from "../tokens";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/validator/loginSchema";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter, usePathname } from "next/navigation";
-import { setCookie, getCookie } from 'typescript-cookie';
-import { useEffect, useState } from 'react';
-import backgroundImage from '../../app/assets/images/backgroundReg.png';
+import { setCookie } from 'typescript-cookie';
 import { useTranslations } from "next-intl";
 import { LanguageSelector } from "../molecules/Language";
 import { postData } from "@/services/api";
 import type { Login, LoginResponse } from "@/types/api";
 import { getUidFromToken } from "@/utils/decode_utils";
-
+import backgroundImage from '../../app/assets/images/backgroundReg.png';
 
 type Inputs = {
   email: string;
@@ -23,7 +20,6 @@ type Inputs = {
 
 export function Login() {
   const router = useRouter();
-  const pathname = usePathname();
   const t = useTranslations("Login");
 
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({ resolver: zodResolver(loginSchema) });
@@ -31,7 +27,6 @@ export function Login() {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const login = await postData<Login, LoginResponse>('/auth/login', data);
-      console.log('Login exitoso:', login);
       setCookie('token', login.access_token);
 
       const user_id = getUidFromToken();
@@ -45,17 +40,13 @@ export function Login() {
       console.error('Error durante el login:', error);
     }
   };
-  
+
   return (
     <div
       className="flex min-h-screen flex-1 flex-col justify-center items-center bg-cover bg-center"
       style={{ backgroundImage: `url(${backgroundImage.src})` }}
     >
-        <div className="mb-10">
-        <LanguageSelector/>
-        </div>
-
-      <div className="flex flex-col justify-center items-center bg-[#212121] w-[500px] h-[450px] rounded-[30px] bg-opacity-80">
+      <div className="flex flex-col justify-center items-center bg-[#212121] w-full max-w-[90%] sm:max-w-[500px] h-auto rounded-[30px] bg-opacity-80 px-4 sm:px-6 py-6">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className={`mt-5 text-center text-2xl font-extrabold leading-9 tracking-tight ${colorTextWhite}`}>
             {t("login")}
@@ -108,6 +99,9 @@ export function Login() {
             </a>
           </p>
         </div>
+      </div>
+      <div className="fixed top-0 left-0 m-4">
+        <LanguageSelector />
       </div>
     </div>
   );
