@@ -29,7 +29,6 @@ const UserTable: React.FC<UserTableProps> = ({ users, selectedName }) => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.id}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.email}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.role.nombre}</td>
                                 </tr>
                             ))
                         ) : (

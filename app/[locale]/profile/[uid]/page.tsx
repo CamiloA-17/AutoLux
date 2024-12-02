@@ -5,7 +5,6 @@ import { Cookies, getCookie } from 'typescript-cookie';
 import { useEffect, useState } from "react";
 import { getUidFromToken } from "@/utils/decode_utils";
 import { AdminBody } from "@/components/organism/AdminBody";
-import { SudoBody } from "@/components/organism/SudoBody";
 import { Role, User } from '@/types/api';
 import { getData } from '@/services/api';
 

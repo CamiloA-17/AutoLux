@@ -17,10 +17,12 @@ export type UserRole = {
 
 export type User = {
     id: string;
+    age: number;
     name: string;
+    last_name: string;
     email: string;
     password: string;
-    role: UserRole;
+    role_id: UserRole;
 };
 
 export type Category = {
