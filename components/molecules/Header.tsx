@@ -5,6 +5,7 @@ import logo from "../../app/assets/images/pixelcut-export.png";
 import profileIcon from "../../app/assets/images/profileLogo.png";
 import { colorBgblack, colorTextWhite } from '../tokens';
 import { getCookie, removeCookie } from 'typescript-cookie';
+import { useRouter } from "next/navigation";
 import { getUidFromToken } from '@/utils/decode_utils';
 import { useTranslations } from 'next-intl';
 import { LanguageSelector } from './Language';
@@ -14,6 +15,8 @@ export function Header() {
     const [uid, setUid] = useState<string | null>(null);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const router = useRouter();
+
     const t = useTranslations("Header");
 
     useEffect(() => {
@@ -33,7 +36,6 @@ export function Header() {
         };
 
         handleResize();
-
         window.addEventListener('resize', handleResize);
 
         return () => {
@@ -42,6 +44,7 @@ export function Header() {
     }, []);
 
     const handleLogout = () => {
+        router.replace('/home');
         removeCookie('token');
         window.location.reload();
     };
@@ -52,6 +55,11 @@ export function Header() {
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
+    };
+
+    const goToProfile = () => {
+        router.push(`/profile/${uid}`);
+
     };
 
     return (
@@ -107,17 +115,30 @@ export function Header() {
                             </li>
                         </>
                     ) : (
-                        <li className="h-12 flex items-center">
+                        <li className="h-12 flex items-center relative">
                             <button onClick={toggleDropdown} className="flex items-center h-full">
                                 <Image src={profileIcon} alt="Profile Icon" className="w-8 h-8 rounded-full" />
                             </button>
+                            {isDropdownOpen && (
+                                <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md z-10">
+                                    <button
+                                        onClick={goToProfile}
+                                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
+                                    >
+                                        {t("profile")}
+                                    </button>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="block px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
+                                    >
+                                        {t("logout")}
+                                    </button>
+                                </div>
+                            )}
                         </li>
                     )}
                 </ul>
             </nav>
         </header>
-
-
-
     );
 }

@@ -14,33 +14,35 @@ export function StoreManagement() {
     const [searchQuery, setSearchQuery] = useState<string>('');
 
     useEffect(() => {
-        getVehicles();
-        getBrands();
-    }, []);
-
-    useEffect(() => {
         filterCars();
     }, [selectedBrand, searchQuery, carsData]);
 
-    const getVehicles = async () => {
-        try {
-            const cars = await getData<Vehicle[]>('/vehicle/');
-            setCarsData(cars);
-            setFilteredCars(cars);
-        } catch (error) {
-            console.error('Error fetching cars:', error);
-        }
-    };
+    useEffect(() => {
+        const fetchVehicles = async () => {
+            try {
+                const cars = await getData<Vehicle[]>('/vehicle/');
+                setCarsData(cars);
+                setFilteredCars(cars);
+            } catch (error) {
+                console.error('Error fetching cars:', error);
+            }
+        };
 
+        fetchVehicles();
+    }, []);
 
-    const getBrands = async () => {
-        try {
-            const brands = await getData<Brand[]>('/brand/');
-            setBrands(brands);
-        } catch (error) {
-            console.error('Error fetching brands:', error);
-        }
-    };
+    useEffect(() => {
+        const fetchBrands = async () => {
+            try {
+                const brands = await getData<Brand[]>('/brand/');
+                setBrands(brands);
+            } catch (error) {
+                console.error('Error fetching brands:', error);
+            }
+        };
+
+        fetchBrands();
+    }, []);
 
     const filterCars = () => {
         const result = carsData.filter((car) => {
@@ -54,11 +56,11 @@ export function StoreManagement() {
     };
 
     const handleSearch = (query: string) => {
-        setSearchQuery(query); // Actualiza el estado del término de búsqueda
+        setSearchQuery(query); 
     };
 
     const handleFilterClick = (id: number) => {
-        setSelectedBrand(id); // Actualiza el estado de la marca seleccionada
+        setSelectedBrand(id); 
     };
 
     return (
