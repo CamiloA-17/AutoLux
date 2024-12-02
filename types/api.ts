@@ -70,9 +70,8 @@ export interface User {
 }
 
 export interface Comment {
-  id: number;
   date: string;
-  userId: string; 
+  user_id: string; 
   content: string;
   vehicle_id: number;
   likes: number;
