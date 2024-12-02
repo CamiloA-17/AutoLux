@@ -1,13 +1,16 @@
-import { Brand } from "@/types/api";
 import React from "react";
 
-interface LateralListProps {
-    filters: Brand[];
+interface LateralListProps<T extends { id: number; name: string }> {
+    filters: T[];
     onFilterClick?: (id: number) => void;
-    title: string; 
+    title: string;
 }
 
-export function LateralList({ filters, onFilterClick, title }: LateralListProps) {
+export function LateralList<T extends { id: number; name: string }>({
+    filters,
+    onFilterClick,
+    title,
+}: LateralListProps<T>) {
     return (
         <>
             <h3 className="text-xl font-bold mb-6">{title}</h3>

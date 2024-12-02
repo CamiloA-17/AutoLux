@@ -89,3 +89,8 @@ export interface Vehicle {
   image: string;
   acceleration: number;
 }
+
+export interface Response {
+  message: string;
+  data: any;
+}

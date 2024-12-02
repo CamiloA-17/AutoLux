@@ -46,5 +46,23 @@
     },
     "About":{
         "about": "AutoLux is your ultimate vehicle encyclopedia. Here you will find detailed information about a wide variety of cars, from timeless classics to the most modern and advanced models. Explore technical specifications, vehicle history, comparisons, and much more."
+    },
+    "Profile":{
+        "greet": "Hello",
+        "info": "My information",
+        "user": "Name",
+        "email": "Email",
+        "id": "ID",
+        "options": "Options",
+        "comments": "Comments",
+        "editProfile": "Edit Profile"
+    },
+    "Options":{
+        "catUsers": "Users",
+        "catCars": "Cars",
+        "category": "Category",
+        "userName": "Name",
+        "userEmail": "Email",
+        "userAge": "Age"
     }
 }

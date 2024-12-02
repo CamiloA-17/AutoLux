@@ -43,9 +43,7 @@ export default function Profile() {
   useEffect(() => {
     const getUserById = async () => {
       try {
-        const user = await getData<User>(`/user/${uid}`);
-        console.log('User:', user);
-        
+        const user = await getData<User>(`/user/${uid}`);        
         setUserData(user);
       } catch (error) {
         console.error('Error fetching user:', error);
@@ -62,7 +60,6 @@ export default function Profile() {
       try {
         if (userData) {
           const role = await getData<Role>(`/role/${userData.role_id}`);
-          console.log('Role:', role);
           setRoleData(role);
         }
       } catch (error) {
