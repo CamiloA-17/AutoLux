@@ -14,7 +14,7 @@ export interface Brand {
 export interface Article {
   id: number;
   date: string; 
-  vehicleId: number;
+  vehicle_id: number;
   title: string;
   content: string;
   updateDate: string; 
