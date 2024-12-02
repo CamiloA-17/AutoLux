@@ -13,6 +13,7 @@ import { useTranslations } from "next-intl";
 import { LanguageSelector } from "../molecules/Language";
 import { postData } from "@/services/api";
 import type { Login, LoginResponse } from "@/types/api";
+import { getUidFromToken } from "@/utils/decode_utils";
 
 
 type Inputs = {
@@ -23,8 +24,6 @@ type Inputs = {
 export function Login() {
   const router = useRouter();
   const pathname = usePathname();
-  const [token, setToken] = useState<string | null>(null);
-
   const t = useTranslations("Login");
 
   const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({ resolver: zodResolver(loginSchema) });
@@ -33,18 +32,19 @@ export function Login() {
     try {
       const login = await postData<Login, LoginResponse>('/auth/login', data);
       console.log('Login exitoso:', login);
-      setToken(login.token);
-      setCookie('token', token);
+      setCookie('token', login.access_token);
+
+      const user_id = getUidFromToken();
+
+      if (!user_id) {
+        console.error('No se pudo obtener el id del usuario');
+      }
       
-      // router.replace(`/profile/${user.uid}`);
+      router.replace(`/profile/${user_id}`);
     } catch (error) {
       console.error('Error durante el login:', error);
     }
   };
-
-  if (token) {
-    return <p>Redirigiendo...</p>;
-  }
   
   return (
     <div

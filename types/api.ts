@@ -55,18 +55,18 @@ export interface Login {
 }
 
 export interface LoginResponse {
-  token: string;
-  refreshToken: string;
+  access_token: string;
+  refresh_token: string;
 }
 
 export interface User {
   id: string;
   name: string;
-  lastName: string;
+  last_name: string;
   email: string;
   age: number;
   password: string;
-  roleId: number;
+  role_id: number;
 }
 
 export interface Comment {
