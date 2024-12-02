@@ -12,7 +12,7 @@ import jaguar from '../../app/assets/images/f-type-r-dynamic.svg';
 import Lamborghini_Huracán_Evo from '../../app/assets/images/huracan_evo.jpg';
 import urus from '../../app/assets/images/urus.jpg';
 import turbo_911_s_image from '../../app/assets/images/911_turbo_s.jpg';
-import Porsche_Cayenne_Turbo_GT3_image from '../../app/assets/images/porsche_cayenne_turbo_gt3.jpg';
+import Porsche_Cayenne_Turbo_GT3_image from '../../app/assets/images/Porsche_Cayenne_Turbo_GT.webp';
 import Bugatti_Veyron_Grand_Sport_image from '../../app/assets/images/bugatti_veyron_grand_sport.jpg';
 import bugatti_divo from '../../app/assets/images/Bugatti_divo.jpg';
 import Tesla_Model_X_Plaid from '../../app/assets/images/tesla_model_x_plaid.jpg';
