@@ -9,6 +9,6 @@ export const metadata: Metadata = {
 
 export default function Car_wiki () {
   return (
-    <div><Comments /></div>
+    <div>prueba</div>
   )
 }
