@@ -46,5 +46,23 @@
     },
     "About":{
         "about": "AutoLux es tu enciclopedia definitiva de vehículos. Aquí encontrarás información detallada sobre una amplia variedad de automóviles, desde los clásicos atemporales hasta los modelos más modernos y avanzados. Explora especificaciones técnicas, historia de los vehículos, comparativas y mucho más."
+    },
+    "Profile":{
+        "greet": "Hola",
+        "info": "Mi información",
+        "user": "Nombre",
+        "email": "Correo electrónico",
+        "id": "Identificación",
+        "options": "Opciones",
+        "comments": "Comentarios",
+        "editProfile": "Editar Perfil"
+    },
+    "Options":{
+        "catUsers": "Usuarios",
+        "catCars": "Carros",
+        "category": "Categoría",
+        "userName": "Nombre",
+        "userEmail": "Email",
+        "userAge": "Edad"
     }
 }
