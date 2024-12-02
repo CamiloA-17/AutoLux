@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 import { Comments } from "@/components/organism/comments"
+import { AdminBody } from "@/components/organism/AdminBody"
 
 export const metadata: Metadata = {
   title: "car wiki",
