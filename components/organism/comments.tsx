@@ -31,52 +31,49 @@ export function Comments() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6">
-            <h2 className="text-xl font-bold mb-4">Comentarios</h2>
+        <div className="max-w-3xl mx-auto my-10 y-6 space-y-6 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Comentarios</h2>
 
-            <form onSubmit={handleSubmit} className="mb-4">
-                <div className="relative w-full">
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="relative">
                     <textarea
                         value={nuevoComentario}
                         onChange={(e) => setNuevoComentario(e.target.value)}
-                        className={`w-full p-4 pr-20 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white ${colorBgblack}`}
-                        placeholder="Has un comentario..."
-                        rows={4}
-                    ></textarea>
+                        className={`w-full p-3 pr-16 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-gray-100 text-gray-800 text-sm`}
+                        placeholder="Escribe tu comentario..."
+                        rows={3}
+                    />
                     <button
                         type="submit"
-                        className={`absolute top-[6.5rem] right-2 px-4 py-2 opacity-80 bg-black text-white rounded-md border`}
+                        className={`absolute top-2 right-2 px-4 py-2 ${colorBgblack} text-white text-sm rounded-md shadow-md hover:bg-indigo-700 focus:outline-none`}
                     >
                         Publicar
                     </button>
                 </div>
             </form>
 
-            <div>
+            <div className="space-y-4">
                 {comentarios.map((comentario) => (
                     <div
                         key={comentario.id}
-                        className={`flex justify-between items-center p-4 m-2`}
+                        className="flex items-start p-4 bg-gray-50 rounded-lg shadow-sm hover:bg-gray-100 transition-all duration-200"
                     >
-                        <div className="flex items-start space-x-4">
-                            <div className="flex flex-col">
-                                <span className="font-semibold">User123</span>
-                                <div className={`w-10 h-10 ${colorBgblack} rounded-full`}></div>
-                            </div>
-                            <div className={`text-sm ${colorBgblack} flex items-center space-x-2 rounded-md p-1 text-white`}>
-                                <p className={`m-5`}>{comentario.texto}</p>
-                                <span>{comentario.likes}</span>
-                                <span role="img" aria-label="corazón">❤️</span>
-                                <div className="flex items-center space-x-1">
-                                    <span>{comentario.stars}</span>
-                                    <span role="img" aria-label="estrella">⭐</span>
+                        <div className="flex-shrink-0">
+                            <div className={`w-10 h-10 ${colorBgblack} rounded-full`} />
+                        </div>
+                        <div className="ml-4 flex-1">
+                            <div className="flex justify-between items-center mb-2">
+                                <span className="font-semibold text-gray-800">User123</span>
+                                <div className="text-sm text-gray-500">
+                                    <span>{comentario.likes} ❤️</span>
+                                    <span className="ml-2">{comentario.stars} ⭐</span>
                                 </div>
                             </div>
+                            <p className="text-gray-700 text-sm">{comentario.texto}</p>
                         </div>
                     </div>
                 ))}
             </div>
-
         </div>
     );
 }
