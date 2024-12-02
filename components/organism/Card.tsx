@@ -46,7 +46,7 @@ export function Card({ vehicle, updateQuantity }: CardProps) {
 
   return (
     <article className={`${stylesForCard} ${hooverForCard}`}>
-      <Link href={`store/${vehicle.id}`}>
+      <Link href={`cars/${vehicle.id}`}>
         <Image className="rounded-t-md w-full h-32 object-cover" src={vehicleImage} alt={vehicle.name} />
         <div className="p-4 flex flex-col flex-grow">
           <p className={`${stylesForTitle}`}>{vehicle.name}</p>
@@ -60,7 +60,7 @@ export function Card({ vehicle, updateQuantity }: CardProps) {
             <p className={`${stylesForText} text-xs mb-4`}>{t("horsepower")}</p>
           </div>
           <hr className={`${spacer}`} />
-          <p className={`${stylesForText} text-xs mb-1`}>{t("max_speed")} {vehicle.topSpeed}</p>
+          <p className={`${stylesForText} text-xs mb-1`}>{t("max_speed")} {vehicle.top_speed}</p>
           <p className={`${stylesForText} text-xs mb-4`}>{t("engine")} {vehicle.engine}</p>
         </div>
       </Link>

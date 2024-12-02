@@ -100,7 +100,7 @@ export function Login() {
           </p>
         </div>
       </div>
-      <div className="fixed top-0 left-0 m-4">
+      <div className="absolute top-0 left-0 m-4">
         <LanguageSelector />
       </div>
     </div>

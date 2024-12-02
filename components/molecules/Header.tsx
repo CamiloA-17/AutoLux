@@ -87,7 +87,7 @@ export function Header() {
                         <a href="/home" className={`${colorTextWhite} flex items-center h-full}`}>{t("home")}</a>
                     </li>
                     <li className="h-12 flex items-center">
-                        <a href="/store" className={`${colorTextWhite} flex items-center h-full}`}>{t("store")}</a>
+                        <a href="/cars" className={`${colorTextWhite} flex items-center h-full}`}>{t("cars")}</a>
                     </li>
                     <li className="h-12 flex items-center">
                         <a href="/home/#about" className={`${colorTextWhite} flex items-center h-full}`}>{t("about")}</a>

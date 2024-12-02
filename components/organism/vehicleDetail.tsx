@@ -45,7 +45,7 @@ export function VehicleDetail() {
                         </div>
                         <div className="flex justify-between">
                             <p className="text-lg font-medium">Top Speed:</p>
-                            <p className="text-lg">{carData.topSpeed} km/h</p>
+                            <p className="text-lg">{carData.top_speed} km/h</p>
                         </div>
                         <div className="flex justify-between">
                             <p className="text-lg font-medium">Horsepower:</p>
