@@ -9,12 +9,29 @@ import { useTranslations } from "next-intl";
 import type { StaticImageData } from 'next/image';
 import lamborghini from '../../app/assets/images/lamborghini-revuelto.svg';
 import jaguar from '../../app/assets/images/f-type-r-dynamic.svg';
-import ferrari from '../../app/assets/images/ferrari-812-superfast.jpg';
+import Lamborghini_Huracán_Evo from '../../app/assets/images/huracan_evo.jpg';
+import urus from '../../app/assets/images/urus.jpg';
+import turbo_911_s_image from '../../app/assets/images/911_turbo_s.jpg';
+import Porsche_Cayenne_Turbo_GT3_image from '../../app/assets/images/Porsche_Cayenne_Turbo_GT.webp';
+import Bugatti_Veyron_Grand_Sport_image from '../../app/assets/images/Bugatti_Veyron_Grand_Sport.jpg';
+import bugatti_divo from '../../app/assets/images/Bugatti_Divo.jpg';
+import Tesla_Model_X_Plaid from '../../app/assets/images/Tesla_Model_X_Plaid.jpg';
+import Tesla_Roadste from '../../app/assets/images/Tesla_Roadste.jpg';
+import Aston_Martin_DBS_Superleggera from '../../app/assets/images/Aston_Martin_DBS_Superleggera.jpg';
+import Aston_Martin_DBX707 from '../../app/assets/images/Aston_Martin_DBX707.jpg';
 
 const imageMap: { [key: string]: StaticImageData } = {
-  lamborghini: lamborghini,
+  huracan_evo: Lamborghini_Huracán_Evo,
+  urus_image: urus,
+  turbo_911_s: turbo_911_s_image,
+  cayenne_turbo_gt: Porsche_Cayenne_Turbo_GT3_image,
+  veyron: Bugatti_Veyron_Grand_Sport_image,
+  divo_image: bugatti_divo,
+  modelx: Tesla_Model_X_Plaid,
+  roadster: Tesla_Roadste,
+  dbs_superleggera: Aston_Martin_DBS_Superleggera,
+  dbx707: Aston_Martin_DBX707,
   jaguar: jaguar,
-  ferrari: ferrari,
 };
 
 type CardProps = {
