@@ -6,7 +6,6 @@ export const getUidFromToken = (): string | null => {
     if (token) {
         try {
             const decoded: any = jwtDecode(token);
-        
             return decoded.user_id;
         } catch (error) {
             console.error('Error decoding token:', error);

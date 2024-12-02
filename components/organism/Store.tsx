@@ -14,39 +14,45 @@ export function StoreManagement() {
     const [searchQuery, setSearchQuery] = useState<string>('');
 
     useEffect(() => {
-        getVehicles();
-        getBrands();
+        filterCars();
+    }, [selectedBrand, searchQuery, carsData]);
+
+    useEffect(() => {
+        const fetchVehicles = async () => {
+            try {
+                const cars = await getData<Vehicle[]>('/vehicle/');
+                setCarsData(cars);
+                setFilteredCars(cars);
+            } catch (error) {
+                console.error('Error fetching cars:', error);
+            }
+        };
+
+        fetchVehicles();
     }, []);
 
     useEffect(() => {
-        filterCars(); 
-    }, [selectedBrand, searchQuery, carsData]);
+        const fetchBrands = async () => {
+            try {
+                const brands = await getData<Brand[]>('/brand/');
+                setBrands(brands);
+            } catch (error) {
+                console.error('Error fetching brands:', error);
+            }
+        };
 
-    const getVehicles = async () => {
-        try {
-            const cars = await getData<Vehicle[]>('/vehicle/');
-            setCarsData(cars);
-        } catch (error) {
-            console.error('Error fetching cars:', error);
-        }
-    };
-
-    const getBrands = async () => {
-        try {
-            const brands = await getData<Brand[]>('/brand/');
-            setBrands(brands); 
-        } catch (error) {
-            console.error('Error fetching brands:', error);
-        }
-    };
+        fetchBrands();
+    }, []);
 
     const filterCars = () => {
         const result = carsData.filter((car) => {
-            const matchesBrand = selectedBrand ? car.marcaId === selectedBrand : true;
+            const matchesBrand = selectedBrand == null || car.marcaId == selectedBrand;
+            console.log();
+            
             const matchesSearch = car.name.toLowerCase().includes(searchQuery.toLowerCase());
             return matchesBrand && matchesSearch;
         });
-        setFilteredCars(result); 
+        setFilteredCars(result);
     };
 
     const handleSearch = (query: string) => {
@@ -65,13 +71,9 @@ export function StoreManagement() {
             <section className="w-full lg:w-3/4">
                 <SearchBar onSearch={handleSearch} />
                 <div className="flex flex-wrap flex-1 gap-5 p-5">
-                    {filteredCars.length > 0 ? (
-                        filteredCars.map((car) => (
-                            <Card key={car.id} vehicle={car} updateQuantity={() => { }} />
-                        ))
-                    ) : (
-                        <p>No cars found</p> 
-                    )}
+                    {filteredCars.map((car) => (
+                        <Card key={car.id} vehicle={car} updateQuantity={() => { }} />
+                    ))}
                 </div>
             </section>
         </div>
