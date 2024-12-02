@@ -1,19 +1,23 @@
 'use client';
 
 import { useState, FormEvent, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { colorBgblack } from '../tokens';
 import { Comment } from '@/types/api';
-import { getData } from '@/services/api';
+import { getData, postData } from '@/services/api';
+import { getUidFromToken } from "@/utils/decode_utils";
 
 export function Comments({ vehicleId }: { vehicleId: string | string[] }) {
+    const router = useRouter();
     const [comments, setComments] = useState<Comment[] | null>(null);
+    const [nuevocomment, setNuevocomment] = useState<string>('');
+    const user_id = getUidFromToken();
 
     const getComments = async () => {
         try {
             const commentsList: Comment[] = await getData<Comment[]>('/comment/');
-            const filteredComments = commentsList.filter(comment => comment.vehicle_id.toString() === vehicleId.toString()); 
+            const filteredComments = commentsList.filter(comment => comment.vehicle_id.toString() === vehicleId.toString());
             setComments(filteredComments);
-            console.log('Comments for vehicle:', filteredComments); 
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
@@ -23,15 +27,46 @@ export function Comments({ vehicleId }: { vehicleId: string | string[] }) {
         if (vehicleId) {
             getComments();
         }
-    }, [vehicleId]); 
+    }, [vehicleId]);
 
-    const [nuevocomment, setNuevocomment] = useState<string>('');
+    const createComment = async () => {
+        try {
+            if (!user_id || !vehicleId || !nuevocomment) {
+                throw new Error("Missing required fields to create a comment");
+            }
+
+            const vehicleIdNumber = Array.isArray(vehicleId) ? parseInt(vehicleId[0], 10) : parseInt(vehicleId, 10);
+
+            if (isNaN(vehicleIdNumber)) {
+                throw new Error("Invalid vehicle ID");
+            }
+
+            const newComment: Comment = {
+                date: new Date().toISOString(),
+                user_id,
+                content: nuevocomment,
+                vehicle_id: vehicleIdNumber,
+                likes: 0,
+                dislikes: 0,
+            };
+
+            await postData<Comment, Comment>('/comment/', newComment);
+            setComments((prev) => (prev ? [...prev, newComment] : [newComment])); // Actualizar comentarios
+            setNuevocomment('');
+        } catch (error) {
+            console.error('Error creating comment:', error);
+        }
+    };
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        if (nuevocomment.trim()) {
-            setNuevocomment('');
+
+        if (!user_id) {
+            router.push('/login');
+            return;
         }
+
+        createComment();
     };
 
     return (
@@ -58,9 +93,9 @@ export function Comments({ vehicleId }: { vehicleId: string | string[] }) {
 
             <div className="space-y-4">
                 {comments && comments.length > 0 ? (
-                    comments.map((comment) => (
+                    comments.map((comment, index) => (
                         <div
-                            key={comment.id}
+                            key={index}
                             className="flex items-start p-4 bg-gray-50 rounded-lg shadow-sm hover:bg-gray-100 transition-all duration-200"
                         >
                             <div className="flex-shrink-0">
@@ -68,10 +103,10 @@ export function Comments({ vehicleId }: { vehicleId: string | string[] }) {
                             </div>
                             <div className="ml-4 flex-1">
                                 <div className="flex justify-between items-center mb-2">
-                                    <span className="font-semibold text-gray-800">{comment.userId}</span>
+                                    <span className="font-semibold text-gray-800">{comment.user_id}</span>
                                     <div className="text-sm text-gray-500">
                                         <span>{comment.likes} ❤️</span>
-                                        <span className="ml-2">{comment.likes} ⭐</span>
+                                        <span className="ml-2">{comment.dislikes} ⭐</span>
                                     </div>
                                 </div>
                                 <p className="text-gray-700 text-sm">{comment.content}</p>
