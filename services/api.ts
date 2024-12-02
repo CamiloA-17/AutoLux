@@ -8,7 +8,6 @@ export async function getDataById<T>(endpoint: string, id: string | number): Pro
   return fetchData<T>(`${endpoint}/${id}`, { method: 'GET' });
 }
 
-
 export async function postData<T, R>(endpoint: string, data: T): Promise<R> {
   return fetchData<R>(endpoint, {
     method: 'POST',
