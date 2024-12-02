@@ -74,7 +74,7 @@ export interface Comment {
   date: string;
   userId: string; 
   content: string;
-  vehicleId: number;
+  vehicle_id: number;
   likes: number;
   dislikes: number;
 }
