@@ -1,12 +1,12 @@
-'use client'
-import React, { useState, useEffect } from 'react'
-import { VehicleDetail } from './vehicleDetail'
-import { Comments } from './comments'
-import { getData } from '@/services/api'
-import { Article } from '@/types/api'
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { VehicleDetail } from './vehicleDetail';
+import { Comments } from './comments';
+import { getData } from '@/services/api';
+import { Article } from '@/types/api';
 
 export function ArticleContent({ id }: { id: string | string[] }) {
-
     const [matchedArticle, setMatchedArticle] = useState<Article | null>(null);
 
     useEffect(() => {
@@ -48,7 +48,7 @@ export function ArticleContent({ id }: { id: string | string[] }) {
             )}
 
             <div>
-                <Comments />
+                {id && <Comments vehicleId={id} />}
             </div>
         </div>
     );
